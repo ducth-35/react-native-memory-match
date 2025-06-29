@@ -79,7 +79,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.gameTitle}>🧠</Text>
-          <Text style={styles.gameName}>Memory Match</Text>
+          <Text style={styles.gameName}>MatchMind</Text>
           <Text style={styles.gameSubtitle}>Lật Thẻ Ghi Nhớ</Text>
         </View>
 

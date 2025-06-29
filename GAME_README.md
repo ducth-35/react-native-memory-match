@@ -1,4 +1,4 @@
-# 🧠 Memory Match - Lật Thẻ Ghi Nhớ
+# 🧠 MatchMind - Lật Thẻ Ghi Nhớ
 
 Một game trí nhớ hấp dẫn được xây dựng bằng React Native với giao diện đẹp mắt và nhiều tính năng thú vị.
 

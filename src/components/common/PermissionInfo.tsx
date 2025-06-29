@@ -58,7 +58,7 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>🔒 Quyền riêng tư</Text>
               <Text style={styles.description}>
-                Ứng dụng Memory Match cam kết bảo vệ quyền riêng tư của bạn:
+                Ứng dụng MatchMind cam kết bảo vệ quyền riêng tư của bạn:
               </Text>
               
               <View style={styles.privacyList}>
@@ -78,7 +78,7 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
               
               <View style={styles.settingsList}>
                 <Text style={styles.settingsItem}>
-                  1. Vào Cài đặt → Ứng dụng → Memory Match
+                  1. Vào Cài đặt → Ứng dụng → MatchMind
                 </Text>
                 <Text style={styles.settingsItem}>
                   2. Chọn "Quyền" hoặc "Permissions"

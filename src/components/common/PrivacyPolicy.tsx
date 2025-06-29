@@ -40,7 +40,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>🔒 Cam kết bảo mật</Text>
               <Text style={styles.text}>
-                Memory Match - Lật Thẻ Ghi Nhớ cam kết bảo vệ quyền riêng tư của người dùng. 
+                MatchMind - Lật Thẻ Ghi Nhớ cam kết bảo vệ quyền riêng tư của người dùng. 
                 Chính sách này giải thích cách chúng tôi xử lý thông tin khi bạn sử dụng ứng dụng.
               </Text>
             </View>
@@ -48,7 +48,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>📊 Thu thập thông tin</Text>
               <Text style={styles.text}>
-                Ứng dụng Memory Match KHÔNG thu thập bất kỳ thông tin cá nhân nào, bao gồm:
+                Ứng dụng MatchMind KHÔNG thu thập bất kỳ thông tin cá nhân nào, bao gồm:
               </Text>
               <View style={styles.list}>
                 <Text style={styles.listItem}>• Tên, email, số điện thoại</Text>
@@ -77,7 +77,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>🌐 Kết nối mạng</Text>
               <Text style={styles.text}>
-                Ứng dụng Memory Match hoạt động hoàn toàn OFFLINE:
+                Ứng dụng MatchMind hoạt động hoàn toàn OFFLINE:
               </Text>
               <View style={styles.list}>
                 <Text style={styles.listItem}>• Không kết nối internet</Text>

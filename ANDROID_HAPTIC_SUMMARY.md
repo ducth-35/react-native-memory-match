@@ -2,7 +2,7 @@
 
 ## ✅ Hoàn thành 100% Haptic Feedback cho Android!
 
-Game Memory Match hiện đã có đầy đủ haptic feedback được tối ưu cho Android devices.
+Game MatchMind hiện đã có đầy đủ haptic feedback được tối ưu cho Android devices.
 
 ## 🎯 Các tính năng đã implement:
 
@@ -140,7 +140,7 @@ Chơi game và cảm nhận haptic feedback tự nhiên.
 
 **Haptic Feedback đã được implement hoàn chỉnh cho Android!**
 
-Game Memory Match hiện có trải nghiệm haptic feedback phong phú và chuyên nghiệp:
+Game MatchMind hiện có trải nghiệm haptic feedback phong phú và chuyên nghiệp:
 - 📳 **5 loại haptic** khác nhau
 - 🎮 **5 game events** với haptic feedback
 - 🔧 **Comprehensive testing** tools

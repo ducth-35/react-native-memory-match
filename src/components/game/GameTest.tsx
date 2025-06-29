@@ -32,7 +32,7 @@ const GameTest: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Memory Match Game Test</Text>
+      <Text style={styles.title}>MatchMind Game Test</Text>
       
       <View style={styles.stats}>
         <Text>Level: {currentLevel.name}</Text>

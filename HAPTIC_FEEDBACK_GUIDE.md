@@ -2,7 +2,7 @@
 
 ## ✅ Haptic Feedback đã được implement cho Android!
 
-Game Memory Match hiện đã có đầy đủ haptic feedback cho tất cả các tương tác trong game, tối ưu cho Android.
+Game MatchMind hiện đã có đầy đủ haptic feedback cho tất cả các tương tác trong game, tối ưu cho Android.
 
 ## 🎯 Các loại Haptic Feedback
 

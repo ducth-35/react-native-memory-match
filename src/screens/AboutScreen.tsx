@@ -44,7 +44,7 @@ const AboutScreen: React.FC<AboutScreenProps> = ({ navigation }) => {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* App Info */}
         <View style={styles.section}>
-          <Text style={styles.appTitle}>🧠 Memory Match</Text>
+          <Text style={styles.appTitle}>🧠 MatchMind</Text>
           <Text style={styles.appSubtitle}>Lật Thẻ Ghi Nhớ</Text>
           <Text style={styles.version}>Phiên bản 1.0.0</Text>
         </View>
@@ -53,7 +53,7 @@ const AboutScreen: React.FC<AboutScreenProps> = ({ navigation }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>📖 Mô tả</Text>
           <Text style={styles.description}>
-            Memory Match là game trí nhớ cổ điển giúp rèn luyện khả năng ghi nhớ và tập trung. 
+            MatchMind là game trí nhớ cổ điển giúp rèn luyện khả năng ghi nhớ và tập trung. 
             Game hoàn toàn miễn phí, không có quảng cáo và hoạt động offline.
           </Text>
         </View>
