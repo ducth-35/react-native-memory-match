@@ -3,18 +3,19 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  Dimensions,
   View,
 } from 'react-native';
 import { Card as CardType } from '../../types/game.types';
+import {
+  getResponsiveCardDimensions,
+  getResponsiveFontSizes
+} from '../../utils/responsiveUtils';
 
 interface CardProps {
   card: CardType;
   onPress: (cardId: string) => void;
   gridSize: number;
 }
-
-const { width } = Dimensions.get('window');
 
 const SimpleCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
   const handlePress = () => {
@@ -23,18 +24,9 @@ const SimpleCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
     }
   };
 
-  const getCardSize = () => {
-    const padding = 40;
-    const spacing = 8;
-    let cols = 4;
-    
-    if (gridSize === 20) cols = 5;
-    else if (gridSize === 30) cols = 6;
-    
-    return (width - padding - (cols - 1) * spacing) / cols;
-  };
-
-  const cardSize = getCardSize();
+  // Get responsive dimensions
+  const { cardSize } = getResponsiveCardDimensions(gridSize);
+  const fontSizes = getResponsiveFontSizes();
 
   return (
     <TouchableOpacity
@@ -52,7 +44,7 @@ const SimpleCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
       >
         {card.isFlipped || card.isMatched ? (
           <>
-            <Text style={[styles.emoji, { fontSize: cardSize * 0.45 }]}>
+            <Text style={[styles.emoji, { fontSize: cardSize * fontSizes.cardEmoji }]}>
               {card.emoji}
             </Text>
             {card.isMatched && (
@@ -63,7 +55,7 @@ const SimpleCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
           </>
         ) : (
           <View style={styles.cardBackContent}>
-            <Text style={[styles.cardBackText, { fontSize: cardSize * 0.3 }]}>🧠</Text>
+            <Text style={[styles.cardBackText, { fontSize: cardSize * fontSizes.cardBack }]}>🧠</Text>
             <View style={styles.cardBackPattern}>
               {Array.from({ length: 4 }, (_, i) => (
                 <View key={i} style={styles.patternDot} />

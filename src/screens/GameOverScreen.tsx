@@ -7,18 +7,21 @@ import {
   SafeAreaView,
   StatusBar,
   Animated,
-  Dimensions,
 } from 'react-native';
 import useGameStore from '../store/useGameStore';
 import { isNewBestScore } from '../utils/gameUtils';
 import { GameFeedback } from '../utils/feedbackUtils';
 import ParticleEffect from '../components/game/ParticleEffect';
+import {
+  getResponsiveFontSizes,
+  getResponsiveSpacing,
+  getResponsiveBorderRadius,
+  getResponsiveGameBoardLayout
+} from '../utils/responsiveUtils';
 
 interface GameOverScreenProps {
   navigation: any;
 }
-
-const { width } = Dimensions.get('window');
 
 const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
   const {
@@ -29,6 +32,12 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
     resetGame,
     initializeGame,
   } = useGameStore();
+
+  // Get responsive values
+  const fontSizes = getResponsiveFontSizes();
+  const spacing = getResponsiveSpacing();
+  const borderRadius = getResponsiveBorderRadius();
+  const layout = getResponsiveGameBoardLayout();
 
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
   const scaleAnim = React.useRef(new Animated.Value(0.5)).current;
@@ -103,13 +112,45 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
     return '🥉';
   };
 
+  // Dynamic styles for responsive design
+  const dynamicStyles = {
+    content: {
+      paddingHorizontal: layout.containerPadding,
+      maxWidth: layout.boardMaxWidth,
+    },
+    resultTitle: {
+      fontSize: fontSizes.title,
+    },
+    resultMessage: {
+      fontSize: fontSizes.subtitle,
+    },
+    statsTitle: {
+      fontSize: fontSizes.subtitle,
+    },
+    statLabel: {
+      fontSize: fontSizes.body,
+    },
+    statValue: {
+      fontSize: fontSizes.body,
+    },
+    button: {
+      borderRadius: borderRadius.medium,
+      paddingVertical: spacing.md,
+      paddingHorizontal: spacing.lg,
+    },
+    buttonText: {
+      fontSize: fontSizes.body,
+    },
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#F8F9FA" />
-      
-      <Animated.View 
+
+      <Animated.View
         style={[
           styles.content,
+          dynamicStyles.content,
           {
             opacity: fadeAnim,
             transform: [
@@ -122,43 +163,43 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
         {/* Result Header */}
         <View style={styles.resultHeader}>
           <Text style={styles.resultEmoji}>{getResultEmoji()}</Text>
-          <Text style={styles.resultTitle}>Hoàn thành!</Text>
-          <Text style={styles.resultMessage}>{getResultMessage()}</Text>
+          <Text style={[styles.resultTitle, dynamicStyles.resultTitle]}>Hoàn thành!</Text>
+          <Text style={[styles.resultMessage, dynamicStyles.resultMessage]}>{getResultMessage()}</Text>
         </View>
 
         {/* Stats Card */}
         <View style={styles.statsCard}>
-          <Text style={styles.statsTitle}>Kết quả</Text>
-          
+          <Text style={[styles.statsTitle, dynamicStyles.statsTitle]}>Kết quả</Text>
+
           <View style={styles.statRow}>
-            <Text style={styles.statLabel}>Độ khó:</Text>
-            <Text style={styles.statValue}>{currentLevel.name}</Text>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Độ khó:</Text>
+            <Text style={[styles.statValue, dynamicStyles.statValue]}>{currentLevel.name}</Text>
           </View>
-          
+
           <View style={styles.statRow}>
-            <Text style={styles.statLabel}>Số lượt:</Text>
-            <Text style={[styles.statValue, isNewRecord && styles.newRecord]}>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Số lượt:</Text>
+            <Text style={[styles.statValue, dynamicStyles.statValue, isNewRecord && styles.newRecord]}>
               {attempts}
             </Text>
           </View>
 
           <View style={styles.statRow}>
-            <Text style={styles.statLabel}>Thời gian:</Text>
-            <Text style={styles.statValue}>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Thời gian:</Text>
+            <Text style={[styles.statValue, dynamicStyles.statValue]}>
               {formatTime(timeElapsed)}
             </Text>
           </View>
 
           <View style={styles.statRow}>
-            <Text style={styles.statLabel}>Kỷ lục cũ:</Text>
-            <Text style={styles.statValue}>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Kỷ lục cũ:</Text>
+            <Text style={[styles.statValue, dynamicStyles.statValue]}>
               {previousBest ? `${previousBest.attempts} lượt` : '---'}
             </Text>
           </View>
-          
+
           <View style={styles.statRow}>
-            <Text style={styles.statLabel}>Hiệu quả:</Text>
-            <Text style={styles.statValue}>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Hiệu quả:</Text>
+            <Text style={[styles.statValue, dynamicStyles.statValue]}>
               {Math.round((currentLevel.pairs / attempts) * 100)}%
             </Text>
           </View>
@@ -166,8 +207,8 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
 
         {/* Performance Rating */}
         <View style={styles.ratingCard}>
-          <Text style={styles.ratingTitle}>Đánh giá</Text>
-          <Text style={styles.ratingText}>
+          <Text style={[styles.ratingTitle, dynamicStyles.statsTitle]}>Đánh giá</Text>
+          <Text style={[styles.ratingText, dynamicStyles.statValue]}>
             {attempts <= currentLevel.pairs + 2 && '🌟 Xuất sắc! Trí nhớ tuyệt vời!'}
             {attempts > currentLevel.pairs + 2 && attempts <= currentLevel.pairs + 5 && '⭐ Rất tốt! Tiếp tục cố gắng!'}
             {attempts > currentLevel.pairs + 5 && attempts <= currentLevel.pairs + 10 && '👍 Tốt! Bạn đang tiến bộ!'}
@@ -178,19 +219,19 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
         {/* Action Buttons */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[styles.button, styles.primaryButton]}
+            style={[styles.button, styles.primaryButton, dynamicStyles.button]}
             onPress={handleNewGame}
             activeOpacity={0.8}
           >
-            <Text style={styles.primaryButtonText}>🎮 Chơi lại</Text>
+            <Text style={[styles.primaryButtonText, dynamicStyles.buttonText]}>🎮 Chơi lại</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.button, styles.secondaryButton]}
+            style={[styles.button, styles.secondaryButton, dynamicStyles.button]}
             onPress={handleBackToMenu}
             activeOpacity={0.8}
           >
-            <Text style={styles.secondaryButtonText}>🏠 Về menu</Text>
+            <Text style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>🏠 Về menu</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -210,8 +251,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 20,
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   resultHeader: {
     alignItems: 'center',
@@ -222,13 +263,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   resultTitle: {
-    fontSize: 32,
     fontWeight: 'bold',
     color: '#2C3E50',
     marginBottom: 8,
   },
   resultMessage: {
-    fontSize: 16,
     color: '#E74C3C',
     textAlign: 'center',
     fontWeight: '600',
@@ -249,7 +288,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   statsTitle: {
-    fontSize: 20,
     fontWeight: 'bold',
     color: '#2C3E50',
     marginBottom: 20,
@@ -264,12 +302,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ECF0F1',
   },
   statLabel: {
-    fontSize: 16,
     color: '#7F8C8D',
     fontWeight: '500',
   },
   statValue: {
-    fontSize: 16,
     color: '#2C3E50',
     fontWeight: 'bold',
   },
@@ -284,13 +320,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ratingTitle: {
-    fontSize: 18,
     fontWeight: 'bold',
     color: '#2C3E50',
     marginBottom: 8,
   },
   ratingText: {
-    fontSize: 14,
     color: '#34495E',
     textAlign: 'center',
     lineHeight: 20,
@@ -299,9 +333,6 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   button: {
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 25,
     alignItems: 'center',
     elevation: 3,
     shadowColor: '#000',
@@ -320,12 +351,10 @@ const styles = StyleSheet.create({
   },
   primaryButtonText: {
     color: '#FFFFFF',
-    fontSize: 18,
     fontWeight: 'bold',
   },
   secondaryButtonText: {
     color: '#FFFFFF',
-    fontSize: 16,
     fontWeight: '600',
   },
 });

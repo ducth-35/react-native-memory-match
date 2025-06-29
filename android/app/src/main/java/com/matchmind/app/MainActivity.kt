@@ -1,4 +1,4 @@
-package com.template
+package com.matchmind.app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

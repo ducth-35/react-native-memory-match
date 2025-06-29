@@ -3,18 +3,20 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  Dimensions,
   View,
 } from 'react-native';
 import { Card as CardType } from '../../types/game.types';
+import {
+  getResponsiveCardDimensions,
+  getResponsiveFontSizes,
+  getResponsiveBorderRadius
+} from '../../utils/responsiveUtils';
 
 interface CardProps {
   card: CardType;
   onPress: (cardId: string) => void;
   gridSize: number;
 }
-
-const { width } = Dimensions.get('window');
 
 const StaticCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
   const handlePress = () => {
@@ -24,18 +26,10 @@ const StaticCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
     }
   };
 
-  const getCardSize = () => {
-    const padding = 40;
-    const spacing = 8;
-    let cols = 4;
-    
-    if (gridSize === 20) cols = 5;
-    else if (gridSize === 30) cols = 6;
-    
-    return (width - padding - (cols - 1) * spacing) / cols;
-  };
-
-  const cardSize = getCardSize();
+  // Get responsive dimensions
+  const { cardSize, spacing } = getResponsiveCardDimensions(gridSize);
+  const fontSizes = getResponsiveFontSizes();
+  const borderRadius = getResponsiveBorderRadius();
 
   console.log('🃏 Rendering card:', card.id, {
     isFlipped: card.isFlipped,
@@ -59,7 +53,7 @@ const StaticCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
       >
         {card.isFlipped || card.isMatched ? (
           <View style={styles.cardFrontContent}>
-            <Text style={[styles.emoji, { fontSize: cardSize * 0.45 }]}>
+            <Text style={[styles.emoji, { fontSize: cardSize * fontSizes.cardEmoji }]}>
               {card.emoji}
             </Text>
             {card.isMatched && (
@@ -70,7 +64,7 @@ const StaticCard: React.FC<CardProps> = ({ card, onPress, gridSize }) => {
           </View>
         ) : (
           <View style={styles.cardBackContent}>
-            <Text style={[styles.cardBackText, { fontSize: cardSize * 0.3 }]}>🧠</Text>
+            <Text style={[styles.cardBackText, { fontSize: cardSize * fontSizes.cardBack }]}>🧠</Text>
             <View style={styles.cardBackPattern}>
               <View style={styles.patternDot} />
               <View style={styles.patternDot} />
@@ -92,7 +86,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-   
   },
   cardBack: {
     backgroundColor: '#4A90E2',
