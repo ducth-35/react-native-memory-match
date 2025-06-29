@@ -9,6 +9,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import StoreTest from './src/components/game/StoreTest'; // Uncomment for store testing
 // import ResponsiveTest from './src/components/game/ResponsiveTest'; // Uncomment for responsive testing
 // import TabletGridTest from './src/components/game/TabletGridTest'; // Uncomment for 5x6 grid testing
+// import TrueResponsiveTest from './src/components/game/TrueResponsiveTest'; // Uncomment for true responsive testing
+// import SimpleResponsiveDebug from './src/components/game/SimpleResponsiveDebug'; // Simple debug test
+import QuickTest from './src/components/game/QuickTest'; // Quick test
 
 const _queryClient = new QueryClient();
 
@@ -20,6 +23,10 @@ function App(): React.JSX.Element {
       {/* <ResponsiveTest /> */}
       {/* Uncomment below to test 5x6 grid layout on tablet */}
       {/* <TabletGridTest /> */}
+      {/* Uncomment below to test TRUE responsive system */}
+      {/* <TrueResponsiveTest /> */}
+      {/* Quick test */}
+      {/* <QuickTest /> */}
     </QueryClientProvider>
   );
 }

@@ -47,227 +47,244 @@ export const isLargeTablet = (): boolean => {
 };
 
 /**
- * Get responsive dimensions for game cards
+ * Get responsive dimensions for game cards - SIMPLIFIED & FIXED
  */
 export const getResponsiveCardDimensions = (gridSize: number) => {
-  const deviceType = getDeviceType();
-
-  // Base configurations for different device types with grid-specific adjustments
-  const getConfig = (gridSize: number) => {
-    const baseConfigs = {
-      [DeviceType.PHONE]: {
-        padding: 40,
-        spacing: 8,
-        maxCardSize: 90,
-        minCardSize: 50,
-      },
-      [DeviceType.TABLET_SMALL]: {
-        padding: 60,
-        spacing: 12,
-        maxCardSize: 120,
-        minCardSize: 70,
-      },
-      [DeviceType.TABLET_LARGE]: {
-        padding: 80,
-        spacing: 16,
-        maxCardSize: 140,
-        minCardSize: 90,
-      },
-    };
-
-    const config = { ...baseConfigs[deviceType] };
-
-    // Special adjustments for 5x6 grid (30 cards) on tablets
-    if (gridSize === 30) {
-      if (deviceType === DeviceType.TABLET_LARGE) {
-        config.padding = 60; // Reduce padding for more space
-        config.spacing = 12;  // Reduce spacing between cards
-        config.maxCardSize = 120; // Smaller max size for 6 columns
-        config.minCardSize = 80;
-      } else if (deviceType === DeviceType.TABLET_SMALL) {
-        config.padding = 40;
-        config.spacing = 8;
-        config.maxCardSize = 100;
-        config.minCardSize = 60;
-      } else {
-        // Phone - make cards even smaller for 6 columns
-        config.padding = 20;
-        config.spacing = 6;
-        config.maxCardSize = 70;
-        config.minCardSize = 45;
-      }
-    }
-
-    return config;
-  };
-
-  const config = getConfig(gridSize);
-
   // Determine columns based on grid size
   let cols = 4;
   if (gridSize === 20) cols = 5;
   else if (gridSize === 30) cols = 6;
 
-  // Calculate card size based on available space
-  const availableWidth = screenWidth - config.padding;
-  const totalSpacing = (cols - 1) * config.spacing;
-  const calculatedSize = (availableWidth - totalSpacing) / cols;
+  // Simple but effective responsive calculation
+  const calculateResponsiveConfig = () => {
+    // Adaptive padding based on screen width
+    let padding = 20; // Base padding
+    if (screenWidth >= 1200) padding = 60;      // Large tablets
+    else if (screenWidth >= 800) padding = 40;  // Medium tablets
+    else if (screenWidth >= 600) padding = 30;  // Small tablets
 
-  // Clamp card size between min and max
-  const cardSize = Math.max(
-    config.minCardSize,
-    Math.min(config.maxCardSize, calculatedSize)
-  );
+    // Adaptive spacing based on screen width and columns
+    let spacing = 6; // Base spacing
+    if (screenWidth >= 1200) spacing = 12;      // Large tablets
+    else if (screenWidth >= 800) spacing = 10;  // Medium tablets
+    else if (screenWidth >= 600) spacing = 8;   // Small tablets
+
+    // For 6 columns (hard mode), reduce spacing to fit better
+    if (cols === 6) {
+      spacing = Math.max(4, spacing - 2);
+      padding = Math.max(16, padding - 10);
+    }
+
+    // Calculate available space
+    const availableWidth = screenWidth - (padding * 2);
+    const totalSpacing = (cols - 1) * spacing;
+    const availableForCards = availableWidth - totalSpacing;
+    const calculatedCardSize = availableForCards / cols;
+
+    // Set reasonable min/max limits
+    const minCardSize = 45;  // Minimum for touch
+    const maxCardSize = 140; // Maximum for aesthetics
+
+    // Apply limits
+    const finalCardSize = Math.max(
+      minCardSize,
+      Math.min(maxCardSize, calculatedCardSize)
+    );
+
+    return {
+      padding,
+      spacing,
+      cardSize: finalCardSize,
+      minCardSize,
+      maxCardSize,
+      calculatedCardSize,
+      availableWidth,
+      availableForCards,
+    };
+  };
+
+  const config = calculateResponsiveConfig();
+
+  // Calculate actual board dimensions
+  const actualBoardWidth = config.cardSize * cols + config.spacing * (cols - 1);
+  const excessSpace = screenWidth - actualBoardWidth - (config.padding * 2);
+
+  // If there's excess space, increase padding to center the board
+  const finalPadding = config.padding + Math.max(0, excessSpace / 2);
 
   return {
-    cardSize,
+    cardSize: config.cardSize,
     spacing: config.spacing,
-    padding: config.padding,
+    padding: finalPadding,
     cols,
-    deviceType,
-    gridSize, // Add gridSize for debugging
+    gridSize,
+    // Debug info
+    debug: {
+      screenWidth,
+      availableWidth: config.availableWidth,
+      availableForCards: config.availableForCards,
+      calculatedCardSize: config.calculatedCardSize,
+      minCardSize: config.minCardSize,
+      maxCardSize: config.maxCardSize,
+      actualBoardWidth,
+      excessSpace,
+      finalPadding,
+    },
   };
 };
 
 /**
- * Get responsive font sizes
+ * Get responsive font sizes - TRUE RESPONSIVE SYSTEM
  */
 export const getResponsiveFontSizes = () => {
-  const deviceType = getDeviceType();
-  
-  const fontSizes = {
-    [DeviceType.PHONE]: {
-      title: 24,
-      subtitle: 18,
-      body: 16,
-      small: 14,
-      cardEmoji: 0.45, // Multiplier for card size
-      cardBack: 0.3,   // Multiplier for card size
-    },
-    [DeviceType.TABLET_SMALL]: {
-      title: 28,
-      subtitle: 22,
-      body: 18,
-      small: 16,
-      cardEmoji: 0.45,
-      cardBack: 0.3,
-    },
-    [DeviceType.TABLET_LARGE]: {
-      title: 32,
-      subtitle: 24,
-      body: 20,
-      small: 18,
-      cardEmoji: 0.45,
-      cardBack: 0.3,
-    },
+  // Base font sizes as percentages of screen width for true responsiveness
+  const baseFontPercent = {
+    title: 0.045,    // 4.5% of screen width
+    subtitle: 0.035, // 3.5% of screen width
+    body: 0.028,     // 2.8% of screen width
+    small: 0.025,    // 2.5% of screen width
   };
 
-  return fontSizes[deviceType];
+  // Min and max font sizes for readability
+  const fontLimits = {
+    title: { min: 20, max: 36 },
+    subtitle: { min: 16, max: 28 },
+    body: { min: 14, max: 22 },
+    small: { min: 12, max: 18 },
+  };
+
+  // Calculate dynamic font sizes
+  const calculateFontSize = (type: keyof typeof baseFontPercent) => {
+    const calculated = screenWidth * baseFontPercent[type];
+    const limits = fontLimits[type];
+    return Math.max(limits.min, Math.min(limits.max, calculated));
+  };
+
+  return {
+    title: calculateFontSize('title'),
+    subtitle: calculateFontSize('subtitle'),
+    body: calculateFontSize('body'),
+    small: calculateFontSize('small'),
+    cardEmoji: 0.45, // Multiplier for card size (remains constant)
+    cardBack: 0.3,   // Multiplier for card size (remains constant)
+  };
 };
 
 /**
- * Get responsive spacing values
+ * Get responsive spacing values - TRUE RESPONSIVE SYSTEM
  */
 export const getResponsiveSpacing = () => {
-  const deviceType = getDeviceType();
-  
-  const spacing = {
-    [DeviceType.PHONE]: {
-      xs: 4,
-      sm: 8,
-      md: 16,
-      lg: 24,
-      xl: 32,
-    },
-    [DeviceType.TABLET_SMALL]: {
-      xs: 6,
-      sm: 12,
-      md: 20,
-      lg: 28,
-      xl: 36,
-    },
-    [DeviceType.TABLET_LARGE]: {
-      xs: 8,
-      sm: 16,
-      md: 24,
-      lg: 32,
-      xl: 40,
-    },
+  // Base spacing as percentages of screen width
+  const baseSpacingPercent = {
+    xs: 0.008,  // 0.8% of screen width
+    sm: 0.015,  // 1.5% of screen width
+    md: 0.025,  // 2.5% of screen width
+    lg: 0.04,   // 4% of screen width
+    xl: 0.055,  // 5.5% of screen width
   };
 
-  return spacing[deviceType];
+  // Min and max spacing values
+  const spacingLimits = {
+    xs: { min: 4, max: 12 },
+    sm: { min: 8, max: 20 },
+    md: { min: 12, max: 32 },
+    lg: { min: 16, max: 48 },
+    xl: { min: 24, max: 64 },
+  };
+
+  // Calculate dynamic spacing
+  const calculateSpacing = (type: keyof typeof baseSpacingPercent) => {
+    const calculated = screenWidth * baseSpacingPercent[type];
+    const limits = spacingLimits[type];
+    return Math.max(limits.min, Math.min(limits.max, calculated));
+  };
+
+  return {
+    xs: calculateSpacing('xs'),
+    sm: calculateSpacing('sm'),
+    md: calculateSpacing('md'),
+    lg: calculateSpacing('lg'),
+    xl: calculateSpacing('xl'),
+  };
 };
 
 /**
- * Get responsive border radius values
+ * Get responsive border radius values - TRUE RESPONSIVE SYSTEM
  */
 export const getResponsiveBorderRadius = () => {
-  const deviceType = getDeviceType();
-  
-  const borderRadius = {
-    [DeviceType.PHONE]: {
-      small: 8,
-      medium: 12,
-      large: 16,
-    },
-    [DeviceType.TABLET_SMALL]: {
-      small: 10,
-      medium: 14,
-      large: 18,
-    },
-    [DeviceType.TABLET_LARGE]: {
-      small: 12,
-      medium: 16,
-      large: 20,
-    },
+  // Base border radius as percentages of screen width
+  const baseBorderRadiusPercent = {
+    small: 0.015,  // 1.5% of screen width
+    medium: 0.025, // 2.5% of screen width
+    large: 0.035,  // 3.5% of screen width
   };
 
-  return borderRadius[deviceType];
+  // Min and max border radius values
+  const borderRadiusLimits = {
+    small: { min: 6, max: 16 },
+    medium: { min: 10, max: 24 },
+    large: { min: 14, max: 32 },
+  };
+
+  // Calculate dynamic border radius
+  const calculateBorderRadius = (type: keyof typeof baseBorderRadiusPercent) => {
+    const calculated = screenWidth * baseBorderRadiusPercent[type];
+    const limits = borderRadiusLimits[type];
+    return Math.max(limits.min, Math.min(limits.max, calculated));
+  };
+
+  return {
+    small: calculateBorderRadius('small'),
+    medium: calculateBorderRadius('medium'),
+    large: calculateBorderRadius('large'),
+  };
 };
 
 /**
- * Get responsive game board layout
+ * Get responsive game board layout - TRUE RESPONSIVE SYSTEM
  */
 export const getResponsiveGameBoardLayout = (gridSize?: number) => {
-  const deviceType = getDeviceType();
-  const spacing = getResponsiveSpacing();
+  // Get card dimensions to calculate actual board size
+  const cardDimensions = gridSize ? getResponsiveCardDimensions(gridSize) : null;
 
-  const baseLayout = {
-    [DeviceType.PHONE]: {
-      containerPadding: spacing.md,
-      boardMaxWidth: screenWidth - spacing.lg,
-      centerContent: true,
-    },
-    [DeviceType.TABLET_SMALL]: {
-      containerPadding: spacing.lg,
-      boardMaxWidth: Math.min(screenWidth - spacing.xl, 600),
-      centerContent: true,
-    },
-    [DeviceType.TABLET_LARGE]: {
-      containerPadding: spacing.xl,
-      boardMaxWidth: Math.min(screenWidth - spacing.xl * 2, 800),
-      centerContent: true,
-    },
-  };
+  // Dynamic container padding based on screen size
+  const minContainerPadding = 16;
+  const maxContainerPadding = 40;
+  const containerPaddingPercent = 0.04; // 4% of screen width
 
-  const layout = { ...baseLayout[deviceType] };
+  const dynamicContainerPadding = Math.max(
+    minContainerPadding,
+    Math.min(maxContainerPadding, screenWidth * containerPaddingPercent)
+  );
 
-  // Special adjustments for 5x6 grid (30 cards)
-  if (gridSize === 30) {
-    if (deviceType === DeviceType.TABLET_LARGE) {
-      layout.containerPadding = spacing.lg; // Reduce padding
-      layout.boardMaxWidth = Math.min(screenWidth - spacing.lg, 900); // Allow wider board
-    } else if (deviceType === DeviceType.TABLET_SMALL) {
-      layout.containerPadding = spacing.md;
-      layout.boardMaxWidth = Math.min(screenWidth - spacing.lg, 700);
-    } else {
-      // Phone
-      layout.containerPadding = spacing.sm;
-      layout.boardMaxWidth = screenWidth - spacing.md;
-    }
+  // Calculate board max width based on actual content needs
+  let boardMaxWidth = screenWidth - (dynamicContainerPadding * 2);
+
+  // If we have card dimensions, use actual board width + some margin
+  if (cardDimensions) {
+    const actualBoardWidth = cardDimensions.cardSize * cardDimensions.cols +
+                            cardDimensions.spacing * (cardDimensions.cols - 1);
+    const marginPercent = 0.1; // 10% margin around the board
+    const desiredWidth = actualBoardWidth * (1 + marginPercent);
+
+    // Use the smaller of calculated width or screen width
+    boardMaxWidth = Math.min(desiredWidth, screenWidth - (dynamicContainerPadding * 2));
   }
 
-  return layout;
+  return {
+    containerPadding: dynamicContainerPadding,
+    boardMaxWidth,
+    centerContent: true,
+    // Debug info
+    debug: {
+      screenWidth,
+      dynamicContainerPadding,
+      actualBoardWidth: cardDimensions ?
+        cardDimensions.cardSize * cardDimensions.cols + cardDimensions.spacing * (cardDimensions.cols - 1) :
+        'N/A',
+      cardDimensions: cardDimensions || 'N/A',
+    },
+  };
 };
 
 /**

@@ -5,6 +5,7 @@ import {
   StatusBar,
   BackHandler,
   Alert,
+  ScrollView,
 } from 'react-native';
 import GameHeader from '../components/game/GameHeader';
 import GameBoard from '../components/game/GameBoard';
@@ -124,13 +125,15 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
         resetTrigger={resetTrigger}
       />
 
-      <View style={styles.gameContainer}>
-        <GameBoard
+      <ScrollView  contentContainerStyle={{  paddingBottom:50}} showsVerticalScrollIndicator={false}>
+       <View style={styles.gameContainer}>
+         <GameBoard
           cards={cards}
           onCardPress={handleCardPress}
           gridSize={currentLevel.gridSize}
         />
-      </View>
+       </View>
+      </ScrollView>
 
       {/* Temporarily disabled ParticleEffect to avoid animation conflicts */}
       {/* <ParticleEffect
@@ -149,7 +152,9 @@ const styles = StyleSheet.create({
   gameContainer: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 20,
+  
   },
 });
 

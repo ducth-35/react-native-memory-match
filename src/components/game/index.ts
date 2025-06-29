@@ -4,3 +4,4 @@ export { default as GameHeader } from './GameHeader';
 export { default as DifficultySelector } from './DifficultySelector';
 export { default as ResponsiveTest } from './ResponsiveTest';
 export { default as TabletGridTest } from './TabletGridTest';
+export { default as TrueResponsiveTest } from './TrueResponsiveTest';

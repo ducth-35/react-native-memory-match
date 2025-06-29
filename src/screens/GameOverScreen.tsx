@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   StatusBar,
   Animated,
+  ScrollView,
 } from 'react-native';
 import useGameStore from '../store/useGameStore';
 import { isNewBestScore } from '../utils/gameUtils';
@@ -145,7 +146,8 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F8F9FA" />
+     <ScrollView>
+       <StatusBar barStyle="dark-content" backgroundColor="#F8F9FA" />
 
       <Animated.View
         style={[
@@ -240,6 +242,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
         show={showCelebration}
         onComplete={() => setShowCelebration(false)}
       />
+     </ScrollView>
     </SafeAreaView>
   );
 };
