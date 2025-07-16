@@ -25,7 +25,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ cards, onCardPress, gridSize }) =
     const rowCards = cards.slice(rowIndex * cols, (rowIndex + 1) * cols);
 
     return (
-      <View key={rowIndex} style={[styles.row, { marginBottom: cardSpacing / 2 }]}>
+      <View key={rowIndex} style={[styles.row, { marginBottom: cardSpacing / 3 }]}>
         {rowCards.map((card) => (
           <Card
             key={card.id}
@@ -69,8 +69,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

@@ -71,8 +71,8 @@ export const getResponsiveCardDimensions = (gridSize: number) => {
 
     // For 6 columns (hard mode), reduce spacing to fit better
     if (cols === 6) {
-      spacing = Math.max(4, spacing - 2);
-      padding = Math.max(16, padding - 10);
+      // spacing = Math.max(4, spacing - 2);
+      // padding = Math.max(16, padding - 10);
     }
 
     // Calculate available space

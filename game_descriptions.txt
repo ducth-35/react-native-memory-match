@@ -1,0 +1,22 @@
+=== SHORT DESCRIPTION (80 characters max) ===
+🧠 MatchMind - Game lật thẻ ghi nhớ với 3 độ khó và hiệu ứng hấp dẫn!
+
+=== LONG DESCRIPTION (4000 characters max) ===
+
+🧠 MatchMind - Lật Thẻ Ghi Nhớ
+
+Thử thách trí nhớ của bạn với MatchMind, một game lật thẻ ghi nhớ hấp dẫn được thiết kế đặc biệt cho thiết bị di động! Tìm các cặp emoji giống nhau trong thời gian ngắn nhất với ít lượt đoán nhất.
+
+✨ Ba Độ Khó Đa Dạng:
+• Dễ (4x4): Hoàn hảo cho người mới bắt đầu với 8 cặp emoji
+• Trung bình (4x5): Thử thách với 10 cặp emoji 
+• Khó (5x6): Cực kỳ thử thách với 15 cặp emoji
+
+⚡ Tính Năng Gameplay:
+• Xáo trộn ngẫu nhiên mỗi ván chơi mới
+• Khả năng reset game bất cứ lúc nào
+
+🎯 Phù Hợp Cho:
+• Trẻ em muốn rèn luyện trí nhớ
+• Người lớn muốn thư giãn sau giờ làm việc
+• Ai muốn thử thách bản thân với các độ khó khác nhau

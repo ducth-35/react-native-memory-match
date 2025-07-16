@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   gameContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center',  
     paddingVertical: 20,
   
   },
