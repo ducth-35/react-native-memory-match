@@ -1,4 +1,4 @@
-package com.matchmind.app
+package com.app.match.mind
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

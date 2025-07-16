@@ -1,4 +1,4 @@
-package com.matchmind.app
+package com.app.match.mind
 
 import android.app.Application
 import com.facebook.react.PackageList

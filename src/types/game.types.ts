@@ -46,21 +46,21 @@ export interface GameStore extends GameState {
 export const DIFFICULTY_LEVELS: DifficultyLevel[] = [
   {
     id: 'easy',
-    name: 'Dễ (4x4)',
+    name: 'Easy (4x4)',
     gridSize: 16,
     pairs: 8,
     emojis: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼']
   },
   {
     id: 'medium',
-    name: 'Trung bình (4x5)',
+    name: 'Medium (4x5)',
     gridSize: 20,
     pairs: 10,
     emojis: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯']
   },
   {
     id: 'hard',
-    name: 'Khó (5x6)',
+    name: 'Hard (5x6)',
     gridSize: 30,
     pairs: 15,
     emojis: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐸', '🐵', '🐔', '🐧']

@@ -111,7 +111,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <StatusBar barStyle="light-content" backgroundColor="#0F0F23" />
       
       <GameHeader
         attempts={attempts}
@@ -147,14 +147,14 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: '#0F0F23',
   },
   gameContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',  
+    alignItems: 'center',
     paddingVertical: 20,
-  
+    paddingHorizontal: 16,
   },
 });
 

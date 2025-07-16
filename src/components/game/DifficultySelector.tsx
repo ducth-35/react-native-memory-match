@@ -24,8 +24,8 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
   const getBestScoreText = (levelId: string) => {
     const bestScore = bestScores[levelId];
     return bestScore
-      ? `Kỷ lục: ${bestScore.attempts} lượt`
-      : 'Chưa chơi';
+      ? `Best: ${bestScore.attempts} moves`
+      : 'Not played';
   };
 
   const getDifficultyColor = (levelId: string) => {
@@ -56,7 +56,7 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Chọn độ khó</Text>
+      <Text style={styles.title}>Choose Difficulty</Text>
       <ScrollView 
         horizontal 
         showsHorizontalScrollIndicator={false}
@@ -86,7 +86,7 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
               </Text>
               
               <Text style={styles.levelInfo}>
-                {level.pairs} cặp thẻ
+                {level.pairs} pairs
               </Text>
               
               <Text style={[styles.bestScore, { color }]}>
@@ -108,69 +108,86 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 25,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '700',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 16,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
+    marginBottom: 20,
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+    letterSpacing: 0.5,
   },
   scrollContainer: {
     paddingHorizontal: 20,
   },
   levelCard: {
-    width: 150,
-    height: 180,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    width: 160,
+    height: 190,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 25,
     padding: 20,
-    marginHorizontal: 10,
+    marginHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: '#E2E8F0',
-   
+    borderWidth: 2,
+    borderColor: 'rgba(138, 43, 226, 0.3)',
+    shadowColor: '#8A2BE2',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
   },
   levelIcon: {
-    fontSize: 32,
-    marginBottom: 8,
+    fontSize: 36,
+    marginBottom: 12,
+    textShadowColor: 'rgba(138, 43, 226, 0.5)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
   levelName: {
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '700',
     textAlign: 'center',
-    marginBottom: 4,
+    marginBottom: 6,
+    color: '#FFFFFF',
+    letterSpacing: 0.3,
   },
   levelInfo: {
-    fontSize: 12,
-    color: '#666666',
+    fontSize: 13,
+    color: '#B8B8D1',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 10,
+    fontWeight: '600',
   },
   bestScore: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '600',
     textAlign: 'center',
+    color: '#B8B8D1',
   },
   selectedIndicator: {
     position: 'absolute',
-    top: 8,
-    right: 8,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    top: 10,
+    right: 10,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
   },
   selectedText: {
     color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '800',
   },
 });
 

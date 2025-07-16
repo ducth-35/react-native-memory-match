@@ -80,7 +80,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <View style={styles.header}>
           <Text style={styles.gameTitle}>🧠</Text>
           <Text style={styles.gameName}>MatchMind</Text>
-          <Text style={styles.gameSubtitle}>Lật Thẻ Ghi Nhớ</Text>
+          <Text style={styles.gameSubtitle}>Memory Card Game</Text>
         </View>
 
         {/* Difficulty Selector */}
@@ -97,12 +97,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           onPress={handleStartGame}
           activeOpacity={0.8}
         >
-          <Text style={styles.startButtonText}>🎮 Bắt đầu chơi</Text>
+          <Text style={styles.startButtonText}>🎮 Start Game</Text>
         </TouchableOpacity>
 
         {/* Best Scores Summary */}
         <View style={styles.statsContainer}>
-          <Text style={styles.statsTitle}>Thống kê</Text>
+          <Text style={styles.statsTitle}>Statistics</Text>
           <View style={styles.statsGrid}>
             {DIFFICULTY_LEVELS.map((level) => {
               const bestScore = bestScores[level.id];
@@ -110,7 +110,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 <View key={level.id} style={styles.statItem}>
                   <Text style={styles.statLevel}>{level.name}</Text>
                   <Text style={styles.statScore}>
-                    {bestScore && bestScore.attempts ? `${bestScore.attempts} lượt` : '---'}
+                    {bestScore && bestScore.attempts ? `${bestScore.attempts} moves` : '---'}
                   </Text>
                 </View>
               );
@@ -120,9 +120,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
         {/* Game Info */}
         <View style={styles.infoContainer}>
-          <Text style={styles.infoTitle}>Cách chơi:</Text>
+          <Text style={styles.infoTitle}>How to play:</Text>
           <Text style={styles.infoText}>
-            • Lật 2 thẻ để tìm cặp giống nhau{'\n'}• Ghi nhớ vị trí các thẻ đã lật{'\n'}• Hoàn thành với ít lượt nhất để đạt kỷ lục
+            • Flip 2 cards to find matching pairs{'\n'}• Remember the positions of flipped cards{'\n'}• Complete with fewest moves to set a record
           </Text>
 
           <TouchableOpacity
@@ -130,7 +130,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             onPress={handleAboutPress}
             activeOpacity={0.8}
           >
-            <Text style={styles.aboutButtonText}>ℹ️ Về ứng dụng</Text>
+            <Text style={styles.aboutButtonText}>ℹ️ About App</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -142,66 +142,84 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    backgroundColor: '#0F0F23',
   },
   content: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
   },
   header: {
     alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 50,
+    marginBottom: 30,
+    paddingVertical: 20,
   },
   gameTitle: {
-    fontSize: 64,
-    marginBottom: 8,
+    fontSize: 72,
+    marginBottom: 12,
+    textShadowColor: 'rgba(138, 43, 226, 0.5)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 20,
   },
   gameName: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 36,
+    fontWeight: '800',
     color: '#FFFFFF',
-    marginBottom: 4,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 4,
+    marginBottom: 8,
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+    letterSpacing: 1,
   },
   gameSubtitle: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.9)',
-    fontWeight: '500',
+    fontSize: 18,
+    color: '#B8B8D1',
+    fontWeight: '600',
+    letterSpacing: 0.5,
   },
   startButton: {
-    backgroundColor: '#FF6B6B',
-    paddingVertical: 18,
-    paddingHorizontal: 40,
-    borderRadius: 30,
-    marginHorizontal: 40,
-    marginVertical: 20,
-
+    backgroundColor: 'linear-gradient(135deg, #8A2BE2, #9932CC)',
+    paddingVertical: 20,
+    paddingHorizontal: 50,
+    borderRadius: 25,
+    marginHorizontal: 30,
+    marginVertical: 25,
+    shadowColor: '#8A2BE2',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 15,
+    elevation: 8,
   },
   startButtonText: {
     color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '800',
     textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
+    letterSpacing: 0.5,
   },
   statsContainer: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 20,
+    padding: 24,
     marginVertical: 20,
-    
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.3)',
+    shadowColor: '#8A2BE2',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
   },
   statsTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 16,
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 18,
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   statsGrid: {
     flexDirection: 'row',
@@ -212,49 +230,54 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   statLevel: {
-    fontSize: 12,
-    color: '#7F8C8D',
-    marginBottom: 4,
+    fontSize: 13,
+    color: '#B8B8D1',
+    marginBottom: 6,
     textAlign: 'center',
+    fontWeight: '600',
   },
   statScore: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#2C3E50',
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#FFFFFF',
   },
   infoContainer: {
-    backgroundColor: '#E8F4FD',
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 'auto',
-    marginBottom: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 20,
+    padding: 24,
+    marginVertical: 15,
+    marginBottom: 40,
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.2)',
   },
   infoTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 16,
+    letterSpacing: 0.5,
   },
   infoText: {
-    fontSize: 14,
-    color: '#34495E',
-    lineHeight: 20,
-    marginBottom: 16,
+    fontSize: 15,
+    color: '#B8B8D1',
+    lineHeight: 24,
+    marginBottom: 20,
+    fontWeight: '500',
   },
   aboutButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    alignSelf: 'center',
+    backgroundColor: 'rgba(138, 43, 226, 0.3)',
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+    alignSelf: 'flex-start',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: 'rgba(138, 43, 226, 0.5)',
   },
   aboutButtonText: {
-    color: '#2C3E50',
-    fontSize: 14,
-    fontWeight: '600',
-    textAlign: 'center',
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
 });
 

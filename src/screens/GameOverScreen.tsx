@@ -100,10 +100,10 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
   const getResultMessage = () => {
     if (isNewRecord) {
       return previousBest
-        ? `🎉 Kỷ lục mới! Cải thiện ${previousBest.attempts - attempts} lượt!`
-        : '🎉 Kỷ lục đầu tiên!';
+        ? `🎉 New Record! Improved by ${previousBest.attempts - attempts} moves!`
+        : '🎉 First Record!';
     }
-    return '🎊 Chúc mừng!';
+    return '🎊 Congratulations!';
   };
 
   const getResultEmoji = () => {
@@ -147,7 +147,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
      <ScrollView>
-       <StatusBar barStyle="dark-content" backgroundColor="#F8F9FA" />
+       <StatusBar barStyle="light-content" backgroundColor="#0F0F23" />
 
       <Animated.View
         style={[
@@ -165,42 +165,42 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
         {/* Result Header */}
         <View style={styles.resultHeader}>
           <Text style={styles.resultEmoji}>{getResultEmoji()}</Text>
-          <Text style={[styles.resultTitle, dynamicStyles.resultTitle]}>Hoàn thành!</Text>
+          <Text style={[styles.resultTitle, dynamicStyles.resultTitle]}>Complete!</Text>
           <Text style={[styles.resultMessage, dynamicStyles.resultMessage]}>{getResultMessage()}</Text>
         </View>
 
         {/* Stats Card */}
         <View style={styles.statsCard}>
-          <Text style={[styles.statsTitle, dynamicStyles.statsTitle]}>Kết quả</Text>
+          <Text style={[styles.statsTitle, dynamicStyles.statsTitle]}>Results</Text>
 
           <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Độ khó:</Text>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Difficulty:</Text>
             <Text style={[styles.statValue, dynamicStyles.statValue]}>{currentLevel.name}</Text>
           </View>
 
           <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Số lượt:</Text>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Moves:</Text>
             <Text style={[styles.statValue, dynamicStyles.statValue, isNewRecord && styles.newRecord]}>
               {attempts}
             </Text>
           </View>
 
           <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Thời gian:</Text>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Time:</Text>
             <Text style={[styles.statValue, dynamicStyles.statValue]}>
               {formatTime(timeElapsed)}
             </Text>
           </View>
 
           <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Kỷ lục cũ:</Text>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Previous Best:</Text>
             <Text style={[styles.statValue, dynamicStyles.statValue]}>
-              {previousBest ? `${previousBest.attempts} lượt` : '---'}
+              {previousBest ? `${previousBest.attempts} moves` : '---'}
             </Text>
           </View>
 
           <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Hiệu quả:</Text>
+            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Efficiency:</Text>
             <Text style={[styles.statValue, dynamicStyles.statValue]}>
               {Math.round((currentLevel.pairs / attempts) * 100)}%
             </Text>
@@ -209,12 +209,12 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
 
         {/* Performance Rating */}
         <View style={styles.ratingCard}>
-          <Text style={[styles.ratingTitle, dynamicStyles.statsTitle]}>Đánh giá</Text>
+          <Text style={[styles.ratingTitle, dynamicStyles.statsTitle]}>Rating</Text>
           <Text style={[styles.ratingText, dynamicStyles.statValue]}>
-            {attempts <= currentLevel.pairs + 2 && '🌟 Xuất sắc! Trí nhớ tuyệt vời!'}
-            {attempts > currentLevel.pairs + 2 && attempts <= currentLevel.pairs + 5 && '⭐ Rất tốt! Tiếp tục cố gắng!'}
-            {attempts > currentLevel.pairs + 5 && attempts <= currentLevel.pairs + 10 && '👍 Tốt! Bạn đang tiến bộ!'}
-            {attempts > currentLevel.pairs + 10 && '💪 Cố gắng lên! Luyện tập nhiều hơn!'}
+            {attempts <= currentLevel.pairs + 2 && '🌟 Excellent! Amazing memory!'}
+            {attempts > currentLevel.pairs + 2 && attempts <= currentLevel.pairs + 5 && '⭐ Very good! Keep it up!'}
+            {attempts > currentLevel.pairs + 5 && attempts <= currentLevel.pairs + 10 && '👍 Good! You\'re improving!'}
+            {attempts > currentLevel.pairs + 10 && '💪 Keep trying! Practice more!'}
           </Text>
         </View>
 
@@ -225,7 +225,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
             onPress={handleNewGame}
             activeOpacity={0.8}
           >
-            <Text style={[styles.primaryButtonText, dynamicStyles.buttonText]}>🎮 Chơi lại</Text>
+            <Text style={[styles.primaryButtonText, dynamicStyles.buttonText]}>🎮 Play Again</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -233,7 +233,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
             onPress={handleBackToMenu}
             activeOpacity={0.8}
           >
-            <Text style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>🏠 Về menu</Text>
+            <Text style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>🏠 Back to Menu</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -250,7 +250,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: '#0F0F23',
   },
   content: {
     flex: 1,
@@ -259,106 +259,130 @@ const styles = StyleSheet.create({
   },
   resultHeader: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 35,
   },
   resultEmoji: {
-    fontSize: 64,
-    marginBottom: 16,
+    fontSize: 72,
+    marginBottom: 20,
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 20,
   },
   resultTitle: {
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 8,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginBottom: 12,
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+    letterSpacing: 1,
   },
   resultMessage: {
-    color: '#E74C3C',
+    color: '#8A2BE2',
     textAlign: 'center',
-    fontWeight: '600',
-    lineHeight: 22,
+    fontWeight: '700',
+    lineHeight: 26,
+    letterSpacing: 0.5,
   },
   statsCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 24,
-    marginBottom: 20,
-    elevation: 3,
-    shadowColor: '#000',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 20,
+    padding: 28,
+    marginBottom: 25,
+    elevation: 6,
+    shadowColor: '#8A2BE2',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.3)',
   },
   statsTitle: {
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 20,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 24,
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   statRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ECF0F1',
+    borderBottomColor: 'rgba(138, 43, 226, 0.2)',
   },
   statLabel: {
-    color: '#7F8C8D',
-    fontWeight: '500',
+    color: '#B8B8D1',
+    fontWeight: '600',
   },
   statValue: {
-    color: '#2C3E50',
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontWeight: '700',
   },
   newRecord: {
-    color: '#E74C3C',
+    color: '#8A2BE2',
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 8,
   },
   ratingCard: {
-    backgroundColor: '#E8F4FD',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 30,
+    backgroundColor: 'rgba(138, 43, 226, 0.15)',
+    borderRadius: 18,
+    padding: 24,
+    marginBottom: 35,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.4)',
   },
   ratingTitle: {
-    fontWeight: 'bold',
-    color: '#2C3E50',
-    marginBottom: 8,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 12,
+    letterSpacing: 0.5,
   },
   ratingText: {
-    color: '#34495E',
+    color: '#B8B8D1',
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 24,
+    fontWeight: '600',
   },
   buttonContainer: {
-    gap: 12,
+    gap: 16,
   },
   button: {
     alignItems: 'center',
-    elevation: 3,
-    shadowColor: '#000',
+    elevation: 6,
+    shadowColor: '#8A2BE2',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   primaryButton: {
-    backgroundColor: '#3498DB',
+    backgroundColor: '#8A2BE2',
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.8)',
   },
   secondaryButton: {
-    backgroundColor: '#95A5A6',
+    backgroundColor: 'rgba(138, 43, 226, 0.3)',
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.5)',
   },
   primaryButtonText: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
+    fontWeight: '800',
+    letterSpacing: 0.5,
   },
   secondaryButtonText: {
     color: '#FFFFFF',
-    fontWeight: '600',
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
 });
 

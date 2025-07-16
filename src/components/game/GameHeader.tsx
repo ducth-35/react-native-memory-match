@@ -53,12 +53,12 @@ const GameHeader: React.FC<GameHeaderProps> = ({
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.button} onPress={onBackPress}>
-          <Text style={styles.buttonText}>← Về menu</Text>
+          <Text style={styles.buttonText}>← Back</Text>
         </TouchableOpacity>
 
         <View style={styles.centerInfo}>
           <Text style={styles.levelText}>{levelName}</Text>
-          <Text style={styles.attemptsText}>Lượt: {attempts}</Text>
+          <Text style={styles.attemptsText}>Moves: {attempts}</Text>
           <Timer
             isRunning={!isGameComplete}
             onTimeUpdate={onTimeUpdate}
@@ -81,7 +81,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
           />
         </View>
         <Text style={styles.progressText}>
-          {matchedPairs}/{totalPairs} cặp ({progress}%)
+          {matchedPairs}/{totalPairs} pairs ({progress}%)
         </Text>
         <View style={styles.progressIcons}>
           {Array.from({ length: totalPairs }, (_, i) => (
@@ -100,85 +100,98 @@ const GameHeader: React.FC<GameHeaderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'rgba(15, 15, 35, 0.95)',
     borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
-    elevation: 4,
-    shadowColor: '#000',
+    borderBottomColor: 'rgba(138, 43, 226, 0.3)',
+    elevation: 8,
+    shadowColor: '#8A2BE2',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 18,
   },
   button: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    backgroundColor: '#F7FAFC',
-    borderRadius: 12,
-    minWidth: 90,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    backgroundColor: 'rgba(138, 43, 226, 0.2)',
+    borderRadius: 15,
+    minWidth: 95,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#E2E8F0',
-    elevation: 2,
-    shadowColor: '#000',
+    borderColor: 'rgba(138, 43, 226, 0.4)',
+    elevation: 3,
+    shadowColor: '#8A2BE2',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   buttonText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#4A5568',
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    letterSpacing: 0.3,
   },
   centerInfo: {
     alignItems: 'center',
     flex: 1,
   },
   levelText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2D3748',
-    marginBottom: 4,
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginBottom: 6,
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
+    letterSpacing: 0.5,
   },
   attemptsText: {
-    fontSize: 16,
-    color: '#718096',
-    fontWeight: '500',
+    fontSize: 17,
+    color: '#B8B8D1',
+    fontWeight: '600',
+    letterSpacing: 0.3,
   },
   progressContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+    paddingHorizontal: 20,
+    paddingBottom: 18,
   },
   progressBar: {
-    height: 8,
-    backgroundColor: '#EDF2F7',
-    borderRadius: 4,
+    height: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 6,
     overflow: 'hidden',
-    marginBottom: 8,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(138, 43, 226, 0.3)',
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#48BB78',
-    borderRadius: 4,
+    backgroundColor: '#8A2BE2',
+    borderRadius: 6,
+    shadowColor: '#8A2BE2',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   progressText: {
-    fontSize: 14,
-    color: '#4A5568',
+    fontSize: 15,
+    color: '#FFFFFF',
     textAlign: 'center',
-    fontWeight: '500',
-    marginBottom: 8,
+    fontWeight: '600',
+    marginBottom: 10,
+    letterSpacing: 0.3,
   },
   progressIcons: {
     flexDirection: 'row',
@@ -186,12 +199,15 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   progressIcon: {
-    fontSize: 16,
-    marginHorizontal: 2,
-    opacity: 0.3,
+    fontSize: 18,
+    marginHorizontal: 3,
+    opacity: 0.4,
   },
   progressIconCompleted: {
     opacity: 1,
+    textShadowColor: 'rgba(138, 43, 226, 0.8)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 8,
   },
 });
 

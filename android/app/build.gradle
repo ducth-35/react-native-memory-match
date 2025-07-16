@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.matchmind.app"
+    namespace "com.app.match.mind"
     defaultConfig {
-        applicationId "com.matchmind.app"
+        applicationId "com.app.match.mind"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
