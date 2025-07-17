@@ -67,7 +67,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
         </View>
 
         <TouchableOpacity style={styles.button} onPress={onResetPress}>
-          <Text style={styles.buttonText}>🔄 Reset</Text>
+          <Text style={styles.buttonText}>Reset</Text>
         </TouchableOpacity>
       </View>
 
@@ -128,14 +128,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'rgba(138, 43, 226, 0.4)',
-    elevation: 3,
-    shadowColor: '#8A2BE2',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
   },
   buttonText: {
     fontSize: 15,

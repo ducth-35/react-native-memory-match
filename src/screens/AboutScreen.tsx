@@ -35,9 +35,9 @@ const AboutScreen: React.FC<AboutScreenProps> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-          <Text style={styles.backButtonText}>← Quay lại</Text>
+          <Text style={styles.backButtonText}>← Back</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Về ứng dụng</Text>
+        <Text style={styles.headerTitle}>About App</Text>
         <View style={styles.placeholder} />
       </View>
 
@@ -45,70 +45,70 @@ const AboutScreen: React.FC<AboutScreenProps> = ({ navigation }) => {
         {/* App Info */}
         <View style={styles.section}>
           <Text style={styles.appTitle}>🧠 MatchMind</Text>
-          <Text style={styles.appSubtitle}>Lật Thẻ Ghi Nhớ</Text>
-          <Text style={styles.version}>Phiên bản 1.0.0</Text>
+          <Text style={styles.appSubtitle}>Memory Card Game</Text>
+          <Text style={styles.version}>Version 1.0.0</Text>
         </View>
 
         {/* Description */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>📖 Mô tả</Text>
+          <Text style={styles.sectionTitle}>📖 Description</Text>
           <Text style={styles.description}>
-            MatchMind là game trí nhớ cổ điển giúp rèn luyện khả năng ghi nhớ và tập trung. 
-            Game hoàn toàn miễn phí, không có quảng cáo và hoạt động offline.
+            MatchMind is a classic memory game that helps train your memory and concentration skills.
+            The game is completely free, ad-free and works offline.
           </Text>
         </View>
 
         {/* Features */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>✨ Tính năng</Text>
+          <Text style={styles.sectionTitle}>✨ Features</Text>
           <View style={styles.featureList}>
-            <Text style={styles.featureItem}>🎮 Game lật thẻ ghi nhớ cổ điển</Text>
-            <Text style={styles.featureItem}>🎯 3 mức độ khó: Dễ, Trung bình, Khó</Text>
-            <Text style={styles.featureItem}>📊 Theo dõi số lượt và thời gian</Text>
-            <Text style={styles.featureItem}>🏆 Lưu kỷ lục cá nhân</Text>
-            <Text style={styles.featureItem}>🎨 Giao diện đẹp mắt với animations</Text>
-            <Text style={styles.featureItem}>📳 Haptic feedback sống động</Text>
-            <Text style={styles.featureItem}>🔒 Hoàn toàn offline</Text>
-            <Text style={styles.featureItem}>🚫 Không quảng cáo</Text>
-            <Text style={styles.featureItem}>💯 Miễn phí 100%</Text>
+            <Text style={styles.featureItem}>🎮 Classic memory card game</Text>
+            <Text style={styles.featureItem}>🎯 3 difficulty levels: Easy, Medium, Hard</Text>
+            <Text style={styles.featureItem}>📊 Track moves and time</Text>
+            <Text style={styles.featureItem}>🏆 Save personal records</Text>
+            <Text style={styles.featureItem}>🎨 Beautiful interface with animations</Text>
+            <Text style={styles.featureItem}>📳 Vibrant haptic feedback</Text>
+            <Text style={styles.featureItem}>🔒 Completely offline</Text>
+            <Text style={styles.featureItem}>🚫 No ads</Text>
+            <Text style={styles.featureItem}>💯 100% free</Text>
           </View>
         </View>
 
         {/* How to Play */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🎯 Cách chơi</Text>
+          <Text style={styles.sectionTitle}>🎯 How to Play</Text>
           <View style={styles.instructionList}>
-            <Text style={styles.instructionItem}>1. Chọn mức độ khó phù hợp</Text>
-            <Text style={styles.instructionItem}>2. Nhấn "Bắt đầu chơi"</Text>
-            <Text style={styles.instructionItem}>3. Lật 2 thẻ để tìm cặp giống nhau</Text>
-            <Text style={styles.instructionItem}>4. Ghi nhớ vị trí các thẻ đã lật</Text>
-            <Text style={styles.instructionItem}>5. Hoàn thành với ít lượt nhất</Text>
+            <Text style={styles.instructionItem}>1. Choose appropriate difficulty level</Text>
+            <Text style={styles.instructionItem}>2. Tap "Start Game"</Text>
+            <Text style={styles.instructionItem}>3. Flip 2 cards to find matching pairs</Text>
+            <Text style={styles.instructionItem}>4. Remember positions of flipped cards</Text>
+            <Text style={styles.instructionItem}>5. Complete with fewest moves</Text>
           </View>
         </View>
 
         {/* Privacy */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🔒 Quyền riêng tư</Text>
+          <Text style={styles.sectionTitle}>🔒 Privacy</Text>
           <Text style={styles.privacyText}>
-            Ứng dụng này không thu thập, lưu trữ hoặc chia sẻ bất kỳ thông tin cá nhân nào. 
-            Tất cả dữ liệu game được lưu trữ cục bộ trên thiết bị của bạn.
+            This app does not collect, store or share any personal information.
+            All game data is stored locally on your device.
           </Text>
           <TouchableOpacity style={styles.privacyButton} onPress={openPrivacyPolicy}>
-            <Text style={styles.privacyButtonText}>📄 Xem chính sách bảo mật</Text>
+            <Text style={styles.privacyButtonText}>📄 View Privacy Policy</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={openPermissionInfo}>
-            <Text>🔐 Thông tin quyền truy cập</Text>
+            <Text>🔐 Permission Information</Text>
           </TouchableOpacity>
         </View>
 
         {/* Permissions */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🔐 Quyền truy cập</Text>
+          <Text style={styles.sectionTitle}>🔐 Permissions</Text>
           <View style={styles.permissionItem}>
             <Text style={styles.permissionName}>📳 VIBRATE</Text>
             <Text style={styles.permissionDescription}>
-              Cần thiết để tạo hiệu ứng rung (haptic feedback) khi chơi game, 
-              giúp trải nghiệm game sinh động hơn.
+              Required to create vibration effects (haptic feedback) when playing the game,
+              making the gaming experience more immersive.
             </Text>
           </View>
         </View>

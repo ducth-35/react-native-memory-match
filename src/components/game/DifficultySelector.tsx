@@ -135,11 +135,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 2,
     borderColor: 'rgba(138, 43, 226, 0.3)',
-    shadowColor: '#8A2BE2',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 5,
   },
   levelIcon: {
     fontSize: 36,

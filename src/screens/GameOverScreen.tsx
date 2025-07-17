@@ -233,7 +233,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
             onPress={handleBackToMenu}
             activeOpacity={0.8}
           >
-            <Text style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>🏠 Back to Menu</Text>
+            <Text style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>Back to Menu</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
@@ -289,14 +289,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 28,
     marginBottom: 25,
-    elevation: 6,
-    shadowColor: '#8A2BE2',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
     borderWidth: 1,
     borderColor: 'rgba(138, 43, 226, 0.3)',
   },
@@ -355,14 +347,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    elevation: 6,
-    shadowColor: '#8A2BE2',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
   },
   primaryButton: {
     backgroundColor: '#8A2BE2',

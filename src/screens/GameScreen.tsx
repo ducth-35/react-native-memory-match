@@ -61,15 +61,15 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
 
   const handleBackPress = () => {
     Alert.alert(
-      'Thoát game',
-      'Bạn có chắc muốn thoát? Tiến trình hiện tại sẽ bị mất.',
+      'Exit game',
+      'Are you sure you want to exit? Current progress will be lost.',
       [
         {
-          text: 'Hủy',
+          text: 'Cancel',
           style: 'cancel',
         },
         {
-          text: 'Thoát',
+          text: 'Exit',
           style: 'destructive',
           onPress: () => navigation.goBack(),
         },

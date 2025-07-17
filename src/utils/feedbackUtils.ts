@@ -2,43 +2,43 @@ import { Vibration, Platform } from 'react-native';
 
 /**
  * Haptic feedback utilities for Android
- * Sử dụng Vibration API với các pattern khác nhau
+ * Uses Vibration API with different patterns
  */
 export const HapticFeedback = {
-  // Light tap feedback - rung nhẹ
+  // Light tap feedback
   light: () => {
     try {
       if (Platform.OS === 'android') {
-        Vibration.vibrate(50); // 50ms rung nhẹ
+        Vibration.vibrate(50); // 50ms light vibration
       }
     } catch (error) {
       console.log('Vibration not available:', error);
     }
   },
 
-  // Medium impact feedback - rung trung bình
+  // Medium impact feedback
   medium: () => {
     try {
       if (Platform.OS === 'android') {
-        Vibration.vibrate(100); // 100ms rung trung bình
+        Vibration.vibrate(100); // 100ms medium vibration
       }
     } catch (error) {
       console.log('Vibration not available:', error);
     }
   },
 
-  // Heavy impact feedback - rung mạnh
+  // Heavy impact feedback
   heavy: () => {
     try {
       if (Platform.OS === 'android') {
-        Vibration.vibrate(200); // 200ms rung mạnh
+        Vibration.vibrate(200); // 200ms heavy vibration
       }
     } catch (error) {
       console.log('Vibration not available:', error);
     }
   },
 
-  // Success feedback - pattern rung thành công
+  // Success feedback pattern
   success: () => {
     try {
       if (Platform.OS === 'android') {
@@ -50,7 +50,7 @@ export const HapticFeedback = {
     }
   },
 
-  // Error feedback - pattern rung lỗi
+  // Error feedback pattern
   error: () => {
     try {
       if (Platform.OS === 'android') {
@@ -62,7 +62,7 @@ export const HapticFeedback = {
     }
   },
 
-  // Game complete celebration - pattern rung ăn mừng
+  // Game complete celebration pattern
   celebration: () => {
     try {
       if (Platform.OS === 'android') {

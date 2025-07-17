@@ -24,7 +24,7 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
       <View style={styles.overlay}>
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.title}>🔐 Quyền truy cập ứng dụng</Text>
+            <Text style={styles.title}>🔐 App Permissions</Text>
             <TouchableOpacity style={styles.closeButton} onPress={onClose}>
               <Text style={styles.closeButtonText}>✕</Text>
             </TouchableOpacity>
@@ -34,64 +34,64 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>📳 VIBRATE Permission</Text>
               <Text style={styles.description}>
-                Ứng dụng yêu cầu quyền rung (VIBRATE) để tạo hiệu ứng haptic feedback 
-                khi bạn chơi game.
+                The app requires vibration permission (VIBRATE) to create haptic feedback
+                when you play the game.
               </Text>
-              
+
               <View style={styles.usageList}>
-                <Text style={styles.usageTitle}>Được sử dụng để:</Text>
-                <Text style={styles.usageItem}>• Rung nhẹ khi lật thẻ</Text>
-                <Text style={styles.usageItem}>• Rung thành công khi tìm được cặp thẻ</Text>
-                <Text style={styles.usageItem}>• Rung lỗi khi không tìm được cặp</Text>
-                <Text style={styles.usageItem}>• Rung ăn mừng khi hoàn thành game</Text>
-                <Text style={styles.usageItem}>• Rung xác nhận khi nhấn nút</Text>
+                <Text style={styles.usageTitle}>Used for:</Text>
+                <Text style={styles.usageItem}>• Light vibration when flipping cards</Text>
+                <Text style={styles.usageItem}>• Success vibration when finding matching pairs</Text>
+                <Text style={styles.usageItem}>• Error vibration when no match found</Text>
+                <Text style={styles.usageItem}>• Celebration vibration when completing game</Text>
+                <Text style={styles.usageItem}>• Confirmation vibration when pressing buttons</Text>
               </View>
 
               <View style={styles.noteBox}>
-                <Text style={styles.noteTitle}>📝 Lưu ý:</Text>
+                <Text style={styles.noteTitle}>📝 Note:</Text>
                 <Text style={styles.noteText}>
-                  • Bạn có thể tắt rung trong cài đặt thiết bị{'\n'}• Quyền này không thu thập dữ liệu cá nhân{'\n'}• Chỉ tạo hiệu ứng rung, không truy cập thông tin khác
+                  • You can turn off vibration in device settings{'\n'}• This permission does not collect personal data{'\n'}• Only creates vibration effect, does not access other information
                 </Text>
               </View>
             </View>
 
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>🔒 Quyền riêng tư</Text>
+              <Text style={styles.sectionTitle}>🔒 Privacy</Text>
               <Text style={styles.description}>
-                Ứng dụng MatchMind cam kết bảo vệ quyền riêng tư của bạn:
+                MatchMind app is committed to protecting your privacy:
               </Text>
-              
+
               <View style={styles.privacyList}>
-                <Text style={styles.privacyItem}>✅ Không thu thập thông tin cá nhân</Text>
-                <Text style={styles.privacyItem}>✅ Không kết nối internet</Text>
-                <Text style={styles.privacyItem}>✅ Không theo dõi hành vi người dùng</Text>
-                <Text style={styles.privacyItem}>✅ Không chia sẻ dữ liệu với bên thứ ba</Text>
-                <Text style={styles.privacyItem}>✅ Dữ liệu game chỉ lưu trên thiết bị</Text>
+                <Text style={styles.privacyItem}>✅ Does not collect personal information</Text>
+                <Text style={styles.privacyItem}>✅ No internet connection</Text>
+                <Text style={styles.privacyItem}>✅ Does not track user behavior</Text>
+                <Text style={styles.privacyItem}>✅ Does not share data with third parties</Text>
+                <Text style={styles.privacyItem}>✅ Game data only stored on device</Text>
               </View>
             </View>
 
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>⚙️ Cài đặt</Text>
+              <Text style={styles.sectionTitle}>⚙️ Settings</Text>
               <Text style={styles.description}>
-                Để quản lý quyền rung:
+                To manage vibration permission:
               </Text>
-              
+
               <View style={styles.settingsList}>
                 <Text style={styles.settingsItem}>
-                  1. Vào Cài đặt → Ứng dụng → MatchMind
+                  1. Go to Settings → Apps → MatchMind
                 </Text>
                 <Text style={styles.settingsItem}>
-                  2. Chọn "Quyền" hoặc "Permissions"
+                  2. Select "Permissions"
                 </Text>
                 <Text style={styles.settingsItem}>
-                  3. Bật/tắt quyền "Rung" theo ý muốn
+                  3. Enable/disable "Vibration" as desired
                 </Text>
               </View>
             </View>
           </ScrollView>
 
           <TouchableOpacity style={styles.okButton} onPress={onClose}>
-            <Text style={styles.okButtonText}>Đã hiểu</Text>
+            <Text style={styles.okButtonText}>Got it</Text>
           </TouchableOpacity>
         </View>
       </View>
