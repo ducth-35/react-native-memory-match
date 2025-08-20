@@ -1,19 +1,14 @@
-import React, { useRef } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
+import React, {useRef} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   interpolate,
 } from 'react-native-reanimated';
-import { getGameProgress } from '../../utils/gameUtils';
+import {getGameProgress} from '../../utils/gameUtils';
 import Timer from './Timer';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface GameHeaderProps {
   attempts: number;
@@ -42,7 +37,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
   const progressValue = useRef(useSharedValue(0)).current;
 
   React.useEffect(() => {
-    progressValue.value = withTiming(progress, { duration: 500 });
+    progressValue.value = withTiming(progress, {duration: 500});
   }, [progress]);
 
   const progressBarStyle = useAnimatedStyle(() => ({
@@ -73,22 +68,19 @@ const GameHeader: React.FC<GameHeaderProps> = ({
 
       <View style={styles.progressContainer}>
         <View style={styles.progressBar}>
-          <Animated.View
-            style={[
-              styles.progressFill,
-              progressBarStyle
-            ]}
-          />
+          <Animated.View style={[styles.progressFill, progressBarStyle]} />
         </View>
         <Text style={styles.progressText}>
           {matchedPairs}/{totalPairs} pairs ({progress}%)
         </Text>
         <View style={styles.progressIcons}>
-          {Array.from({ length: totalPairs }, (_, i) => (
-            <Text key={i} style={[
-              styles.progressIcon,
-              i < matchedPairs && styles.progressIconCompleted
-            ]}>
+          {Array.from({length: totalPairs}, (_, i) => (
+            <Text
+              key={i}
+              style={[
+                styles.progressIcon,
+                i < matchedPairs && styles.progressIconCompleted,
+              ]}>
               {i < matchedPairs ? '🎯' : '⭕'}
             </Text>
           ))}
@@ -145,7 +137,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 6,
     textShadowColor: 'rgba(138, 43, 226, 0.8)',
-    textShadowOffset: { width: 0, height: 2 },
+    textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 4,
     letterSpacing: 0.5,
   },
@@ -173,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#8A2BE2',
     borderRadius: 6,
     shadowColor: '#8A2BE2',
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: {width: 0, height: 0},
     shadowOpacity: 0.8,
     shadowRadius: 4,
   },
@@ -198,7 +190,7 @@ const styles = StyleSheet.create({
   progressIconCompleted: {
     opacity: 1,
     textShadowColor: 'rgba(138, 43, 226, 0.8)',
-    textShadowOffset: { width: 0, height: 0 },
+    textShadowOffset: {width: 0, height: 0},
     textShadowRadius: 8,
   },
 });

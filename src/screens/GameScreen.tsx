@@ -1,14 +1,13 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
-  View,
-  StyleSheet,
-  StatusBar,
-  BackHandler,
   Alert,
+  BackHandler,
   ScrollView,
+  StyleSheet,
+  View
 } from 'react-native';
-import GameHeader from '../components/game/GameHeader';
 import GameBoard from '../components/game/GameBoard';
+import GameHeader from '../components/game/GameHeader';
 // import ParticleEffect from '../components/game/ParticleEffect'; // Temporarily disabled
 import useGameStore from '../store/useGameStore';
 
@@ -16,7 +15,7 @@ interface GameScreenProps {
   navigation: any;
 }
 
-const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
+const GameScreen: React.FC<GameScreenProps> = ({navigation}) => {
   const {
     cards,
     attempts,
@@ -36,7 +35,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
     // Handle hardware back button
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
-      handleBackPress
+      handleBackPress,
     );
 
     return () => backHandler.remove();
@@ -73,35 +72,38 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
           style: 'destructive',
           onPress: () => navigation.goBack(),
         },
-      ]
+      ],
     );
     return true;
   };
 
   const handleResetPress = () => {
     Alert.alert(
-      'Chơi lại',
-      'Bạn có chắc muốn bắt đầu lại? Tiến trình hiện tại sẽ bị mất.',
+      'Replay',
+      'Are you sure you want to start over? Current progress will be lost.',
       [
         {
-          text: 'Hủy',
+          text: 'Cancel',
           style: 'cancel',
         },
         {
-          text: 'Chơi lại',
+          text: 'Replay',
           style: 'destructive',
           onPress: () => {
             resetGame();
             setResetTrigger(prev => prev + 1);
           },
         },
-      ]
+      ],
     );
   };
 
-  const handleTimeUpdate = useCallback((time: number) => {
-    updateTime(time);
-  }, [updateTime]);
+  const handleTimeUpdate = useCallback(
+    (time: number) => {
+      updateTime(time);
+    },
+    [updateTime],
+  );
 
   const handleCardPress = (cardId: string) => {
     if (!isGameComplete) {
@@ -111,8 +113,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#0F0F23" />
-      
       <GameHeader
         attempts={attempts}
         matchedPairs={matchedPairs}
@@ -125,14 +125,16 @@ const GameScreen: React.FC<GameScreenProps> = ({ navigation }) => {
         resetTrigger={resetTrigger}
       />
 
-      <ScrollView  contentContainerStyle={{  paddingBottom:50}} showsVerticalScrollIndicator={false}>
-       <View style={styles.gameContainer}>
-         <GameBoard
-          cards={cards}
-          onCardPress={handleCardPress}
-          gridSize={currentLevel.gridSize}
-        />
-       </View>
+      <ScrollView
+        contentContainerStyle={{paddingBottom: 50}}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.gameContainer}>
+          <GameBoard
+            cards={cards}
+            onCardPress={handleCardPress}
+            gridSize={currentLevel.gridSize}
+          />
+        </View>
       </ScrollView>
 
       {/* Temporarily disabled ParticleEffect to avoid animation conflicts */}

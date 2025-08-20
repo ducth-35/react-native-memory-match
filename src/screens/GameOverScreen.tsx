@@ -1,30 +1,29 @@
 import React, { useEffect } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-  StatusBar,
   Animated,
   ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import useGameStore from '../store/useGameStore';
-import { isNewBestScore } from '../utils/gameUtils';
-import { GameFeedback } from '../utils/feedbackUtils';
 import ParticleEffect from '../components/game/ParticleEffect';
+import useGameStore from '../store/useGameStore';
+import { GameFeedback } from '../utils/feedbackUtils';
+import { isNewBestScore } from '../utils/gameUtils';
 import {
-  getResponsiveFontSizes,
-  getResponsiveSpacing,
   getResponsiveBorderRadius,
-  getResponsiveGameBoardLayout
+  getResponsiveFontSizes,
+  getResponsiveGameBoardLayout,
+  getResponsiveSpacing,
 } from '../utils/responsiveUtils';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface GameOverScreenProps {
   navigation: any;
 }
 
-const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
+const GameOverScreen: React.FC<GameOverScreenProps> = ({navigation}) => {
   const {
     attempts,
     timeElapsed,
@@ -94,13 +93,17 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, '0')}:${secs
+      .toString()
+      .padStart(2, '0')}`;
   };
 
   const getResultMessage = () => {
     if (isNewRecord) {
       return previousBest
-        ? `🎉 New Record! Improved by ${previousBest.attempts - attempts} moves!`
+        ? `🎉 New Record! Improved by ${
+            previousBest.attempts - attempts
+          } moves!`
         : '🎉 First Record!';
     }
     return '🎊 Congratulations!';
@@ -146,103 +149,140 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-     <ScrollView>
-       <StatusBar barStyle="light-content" backgroundColor="#0F0F23" />
-
-      <Animated.View
-        style={[
-          styles.content,
-          dynamicStyles.content,
-          {
-            opacity: fadeAnim,
-            transform: [
-              { scale: scaleAnim },
-              { translateY: slideAnim },
-            ],
-          },
-        ]}
-      >
-        {/* Result Header */}
-        <View style={styles.resultHeader}>
-          <Text style={styles.resultEmoji}>{getResultEmoji()}</Text>
-          <Text style={[styles.resultTitle, dynamicStyles.resultTitle]}>Complete!</Text>
-          <Text style={[styles.resultMessage, dynamicStyles.resultMessage]}>{getResultMessage()}</Text>
-        </View>
-
-        {/* Stats Card */}
-        <View style={styles.statsCard}>
-          <Text style={[styles.statsTitle, dynamicStyles.statsTitle]}>Results</Text>
-
-          <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Difficulty:</Text>
-            <Text style={[styles.statValue, dynamicStyles.statValue]}>{currentLevel.name}</Text>
-          </View>
-
-          <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Moves:</Text>
-            <Text style={[styles.statValue, dynamicStyles.statValue, isNewRecord && styles.newRecord]}>
-              {attempts}
+      <ScrollView>
+        <Animated.View
+          style={[
+            styles.content,
+            dynamicStyles.content,
+            {
+              opacity: fadeAnim,
+              transform: [{scale: scaleAnim}, {translateY: slideAnim}],
+            },
+          ]}>
+          {/* Result Header */}
+          <View style={styles.resultHeader}>
+            <Text style={styles.resultEmoji}>{getResultEmoji()}</Text>
+            <Text style={[styles.resultTitle, dynamicStyles.resultTitle]}>
+              Complete!
+            </Text>
+            <Text style={[styles.resultMessage, dynamicStyles.resultMessage]}>
+              {getResultMessage()}
             </Text>
           </View>
 
-          <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Time:</Text>
-            <Text style={[styles.statValue, dynamicStyles.statValue]}>
-              {formatTime(timeElapsed)}
+          {/* Stats Card */}
+          <View style={styles.statsCard}>
+            <Text style={[styles.statsTitle, dynamicStyles.statsTitle]}>
+              Results
+            </Text>
+
+            <View style={styles.statRow}>
+              <Text style={[styles.statLabel, dynamicStyles.statLabel]}>
+                Difficulty:
+              </Text>
+              <Text style={[styles.statValue, dynamicStyles.statValue]}>
+                {currentLevel.name}
+              </Text>
+            </View>
+
+            <View style={styles.statRow}>
+              <Text style={[styles.statLabel, dynamicStyles.statLabel]}>
+                Moves:
+              </Text>
+              <Text
+                style={[
+                  styles.statValue,
+                  dynamicStyles.statValue,
+                  isNewRecord && styles.newRecord,
+                ]}>
+                {attempts}
+              </Text>
+            </View>
+
+            <View style={styles.statRow}>
+              <Text style={[styles.statLabel, dynamicStyles.statLabel]}>
+                Time:
+              </Text>
+              <Text style={[styles.statValue, dynamicStyles.statValue]}>
+                {formatTime(timeElapsed)}
+              </Text>
+            </View>
+
+            <View style={styles.statRow}>
+              <Text style={[styles.statLabel, dynamicStyles.statLabel]}>
+                Previous Best:
+              </Text>
+              <Text style={[styles.statValue, dynamicStyles.statValue]}>
+                {previousBest ? `${previousBest.attempts} moves` : '---'}
+              </Text>
+            </View>
+
+            <View style={styles.statRow}>
+              <Text style={[styles.statLabel, dynamicStyles.statLabel]}>
+                Efficiency:
+              </Text>
+              <Text style={[styles.statValue, dynamicStyles.statValue]}>
+                {Math.round((currentLevel.pairs / attempts) * 100)}%
+              </Text>
+            </View>
+          </View>
+
+          {/* Performance Rating */}
+          <View style={styles.ratingCard}>
+            <Text style={[styles.ratingTitle, dynamicStyles.statsTitle]}>
+              Rating
+            </Text>
+            <Text style={[styles.ratingText, dynamicStyles.statValue]}>
+              {attempts <= currentLevel.pairs + 2 &&
+                '🌟 Excellent! Amazing memory!'}
+              {attempts > currentLevel.pairs + 2 &&
+                attempts <= currentLevel.pairs + 5 &&
+                '⭐ Very good! Keep it up!'}
+              {attempts > currentLevel.pairs + 5 &&
+                attempts <= currentLevel.pairs + 10 &&
+                "👍 Good! You're improving!"}
+              {attempts > currentLevel.pairs + 10 &&
+                '💪 Keep trying! Practice more!'}
             </Text>
           </View>
 
-          <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Previous Best:</Text>
-            <Text style={[styles.statValue, dynamicStyles.statValue]}>
-              {previousBest ? `${previousBest.attempts} moves` : '---'}
-            </Text>
+          {/* Action Buttons */}
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                styles.primaryButton,
+                dynamicStyles.button,
+              ]}
+              onPress={handleNewGame}
+              activeOpacity={0.8}>
+              <Text
+                style={[styles.primaryButtonText, dynamicStyles.buttonText]}>
+                🎮 Play Again
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.button,
+                styles.secondaryButton,
+                dynamicStyles.button,
+              ]}
+              onPress={handleBackToMenu}
+              activeOpacity={0.8}>
+              <Text
+                style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>
+                Back to Menu
+              </Text>
+            </TouchableOpacity>
           </View>
+        </Animated.View>
 
-          <View style={styles.statRow}>
-            <Text style={[styles.statLabel, dynamicStyles.statLabel]}>Efficiency:</Text>
-            <Text style={[styles.statValue, dynamicStyles.statValue]}>
-              {Math.round((currentLevel.pairs / attempts) * 100)}%
-            </Text>
-          </View>
-        </View>
-
-        {/* Performance Rating */}
-        <View style={styles.ratingCard}>
-          <Text style={[styles.ratingTitle, dynamicStyles.statsTitle]}>Rating</Text>
-          <Text style={[styles.ratingText, dynamicStyles.statValue]}>
-            {attempts <= currentLevel.pairs + 2 && '🌟 Excellent! Amazing memory!'}
-            {attempts > currentLevel.pairs + 2 && attempts <= currentLevel.pairs + 5 && '⭐ Very good! Keep it up!'}
-            {attempts > currentLevel.pairs + 5 && attempts <= currentLevel.pairs + 10 && '👍 Good! You\'re improving!'}
-            {attempts > currentLevel.pairs + 10 && '💪 Keep trying! Practice more!'}
-          </Text>
-        </View>
-
-        {/* Action Buttons */}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.button, styles.primaryButton, dynamicStyles.button]}
-            onPress={handleNewGame}
-            activeOpacity={0.8}
-          >
-            <Text style={[styles.primaryButtonText, dynamicStyles.buttonText]}>🎮 Play Again</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.button, styles.secondaryButton, dynamicStyles.button]}
-            onPress={handleBackToMenu}
-            activeOpacity={0.8}
-          >
-            <Text style={[styles.secondaryButtonText, dynamicStyles.buttonText]}>Back to Menu</Text>
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-
-      <ParticleEffect
-        show={showCelebration}
-        onComplete={() => setShowCelebration(false)}
-      />
-     </ScrollView>
+        <ParticleEffect
+          show={showCelebration}
+          onComplete={() => setShowCelebration(false)}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -265,7 +305,7 @@ const styles = StyleSheet.create({
     fontSize: 72,
     marginBottom: 20,
     textShadowColor: 'rgba(138, 43, 226, 0.8)',
-    textShadowOffset: { width: 0, height: 0 },
+    textShadowOffset: {width: 0, height: 0},
     textShadowRadius: 20,
   },
   resultTitle: {
@@ -273,7 +313,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 12,
     textShadowColor: 'rgba(138, 43, 226, 0.8)',
-    textShadowOffset: { width: 0, height: 2 },
+    textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 8,
     letterSpacing: 1,
   },
@@ -318,7 +358,7 @@ const styles = StyleSheet.create({
   newRecord: {
     color: '#8A2BE2',
     textShadowColor: 'rgba(138, 43, 226, 0.8)',
-    textShadowOffset: { width: 0, height: 0 },
+    textShadowOffset: {width: 0, height: 0},
     textShadowRadius: 8,
   },
   ratingCard: {

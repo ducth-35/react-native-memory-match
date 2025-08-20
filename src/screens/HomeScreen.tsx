@@ -1,28 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
-  View,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-  StatusBar,
-  ScrollView,
+  View,
 } from 'react-native';
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { DIFFICULTY_LEVELS } from '../types/game.types';
 import DifficultySelector from '../components/game/DifficultySelector';
 import useGameStore from '../store/useGameStore';
-import { GameFeedback } from '../utils/feedbackUtils';
+import {DIFFICULTY_LEVELS} from '../types/game.types';
+import {GameFeedback} from '../utils/feedbackUtils';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface HomeScreenProps {
   navigation: any;
 }
 
-const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const {
     currentLevel,
     bestScores,
@@ -38,8 +37,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     loadBestScores();
 
     // Entrance animation
-    opacity.value = withTiming(1, { duration: 1000 });
-    translateY.value = withTiming(0, { duration: 800 });
+    opacity.value = withTiming(1, {duration: 1000});
+    translateY.value = withTiming(0, {duration: 800});
   }, []); // Remove loadBestScores from dependencies
 
   const handleStartGame = () => {
@@ -48,7 +47,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     navigation.navigate('GAME_SCREEN');
   };
 
-  const handleLevelSelect = (level: typeof DIFFICULTY_LEVELS[0]) => {
+  const handleLevelSelect = (level: (typeof DIFFICULTY_LEVELS)[0]) => {
     GameFeedback.buttonPress();
     setCurrentLevel(level);
   };
@@ -61,80 +60,74 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
-      transform: [{ translateY: translateY.value }],
+      transform: [{translateY: translateY.value}],
     };
   });
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F8F9FA" />
-      
-     <ScrollView>
-       <Animated.View
-        style={[
-          styles.content,
-          animatedStyle,
-        ]}
-      >
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.gameTitle}>🧠</Text>
-          <Text style={styles.gameName}>MatchMind</Text>
-          <Text style={styles.gameSubtitle}>Memory Card Game</Text>
-        </View>
-
-        {/* Difficulty Selector */}
-        <DifficultySelector
-          levels={DIFFICULTY_LEVELS}
-          selectedLevel={currentLevel}
-          bestScores={bestScores}
-          onLevelSelect={handleLevelSelect}
-        />
-
-        {/* Start Game Button */}
-        <TouchableOpacity
-          style={styles.startButton}
-          onPress={handleStartGame}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.startButtonText}>🎮 Start Game</Text>
-        </TouchableOpacity>
-
-        {/* Best Scores Summary */}
-        <View style={styles.statsContainer}>
-          <Text style={styles.statsTitle}>Statistics</Text>
-          <View style={styles.statsGrid}>
-            {DIFFICULTY_LEVELS.map((level) => {
-              const bestScore = bestScores[level.id];
-              return (
-                <View key={level.id} style={styles.statItem}>
-                  <Text style={styles.statLevel}>{level.name}</Text>
-                  <Text style={styles.statScore}>
-                    {bestScore && bestScore.attempts ? `${bestScore.attempts} moves` : '---'}
-                  </Text>
-                </View>
-              );
-            })}
+      <ScrollView>
+        <Animated.View style={[styles.content, animatedStyle]}>
+          {/* Header */}
+          <View style={styles.header}>
+            <Text style={styles.gameName}>MatchMind</Text>
+            <Text style={styles.gameSubtitle}>Memory Card Mini Game</Text>
           </View>
-        </View>
 
-        {/* Game Info */}
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoTitle}>How to play:</Text>
-          <Text style={styles.infoText}>
-            • Flip 2 cards to find matching pairs{'\n'}• Remember the positions of flipped cards{'\n'}• Complete with fewest moves to set a record
-          </Text>
+          {/* Difficulty Selector */}
+          <DifficultySelector
+            levels={DIFFICULTY_LEVELS}
+            selectedLevel={currentLevel}
+            bestScores={bestScores}
+            onLevelSelect={handleLevelSelect}
+          />
 
+          {/* Start Game Button */}
           <TouchableOpacity
-            style={styles.aboutButton}
-            onPress={handleAboutPress}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.aboutButtonText}>ℹ️ About App</Text>
+            style={styles.startButton}
+            onPress={handleStartGame}
+            activeOpacity={0.8}>
+            <Text style={styles.startButtonText}>Start Game</Text>
           </TouchableOpacity>
-        </View>
-      </Animated.View>
-     </ScrollView>
+
+          {/* Best Scores Summary */}
+          <View style={styles.statsContainer}>
+            <Text style={styles.statsTitle}>Statistics</Text>
+            <View style={styles.statsGrid}>
+              {DIFFICULTY_LEVELS.map(level => {
+                const bestScore = bestScores[level.id];
+                return (
+                  <View key={level.id} style={styles.statItem}>
+                    <Text style={styles.statLevel}>{level.name}</Text>
+                    <Text style={styles.statScore}>
+                      {bestScore && bestScore.attempts
+                        ? `${bestScore.attempts} moves`
+                        : '---'}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+
+          {/* Game Info */}
+          <View style={styles.infoContainer}>
+            <Text style={styles.infoTitle}>How to play:</Text>
+            <Text style={styles.infoText}>
+              • Flip 2 cards to find matching pairs{'\n'}• Remember the
+              positions of flipped cards{'\n'}• Complete with fewest moves to
+              set a record
+            </Text>
+
+            <TouchableOpacity
+              style={styles.aboutButton}
+              onPress={handleAboutPress}
+              activeOpacity={0.8}>
+              <Text style={styles.aboutButtonText}>About App</Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -158,7 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 72,
     marginBottom: 12,
     textShadowColor: 'rgba(138, 43, 226, 0.5)',
-    textShadowOffset: { width: 0, height: 0 },
+    textShadowOffset: {width: 0, height: 0},
     textShadowRadius: 20,
   },
   gameName: {
@@ -167,7 +160,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 8,
     textShadowColor: 'rgba(138, 43, 226, 0.8)',
-    textShadowOffset: { width: 0, height: 2 },
+    textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 8,
     letterSpacing: 1,
   },
@@ -191,7 +184,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 0, height: 2 },
+    textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 4,
     letterSpacing: 0.5,
   },
