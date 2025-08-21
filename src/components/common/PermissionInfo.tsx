@@ -34,23 +34,23 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>📳 VIBRATE Permission</Text>
               <Text style={styles.description}>
-                The app requires vibration permission (VIBRATE) to create haptic feedback
-                when you play the game.
+                The app requires vibration permission (VIBRATE) to provide enhanced haptic feedback
+                using react-native-haptic-feedback library when you play the game.
               </Text>
 
               <View style={styles.usageList}>
                 <Text style={styles.usageTitle}>Used for:</Text>
-                <Text style={styles.usageItem}>• Light vibration when flipping cards</Text>
-                <Text style={styles.usageItem}>• Success vibration when finding matching pairs</Text>
-                <Text style={styles.usageItem}>• Error vibration when no match found</Text>
-                <Text style={styles.usageItem}>• Celebration vibration when completing game</Text>
-                <Text style={styles.usageItem}>• Confirmation vibration when pressing buttons</Text>
+                <Text style={styles.usageItem}>• Light haptic feedback when flipping cards</Text>
+                <Text style={styles.usageItem}>• Success haptic feedback when finding matching pairs</Text>
+                <Text style={styles.usageItem}>• Error haptic feedback when no match found</Text>
+                <Text style={styles.usageItem}>• Celebration haptic feedback when completing game</Text>
+                <Text style={styles.usageItem}>• Confirmation haptic feedback when pressing buttons</Text>
               </View>
 
               <View style={styles.noteBox}>
                 <Text style={styles.noteTitle}>📝 Note:</Text>
                 <Text style={styles.noteText}>
-                  • You can turn off vibration in device settings{'\n'}• This permission does not collect personal data{'\n'}• Only creates vibration effect, does not access other information
+                  • You can turn off haptic feedback in device settings{'\n'}• This permission does not collect personal data{'\n'}• Only creates haptic feedback effects, does not access other information
                 </Text>
               </View>
             </View>
@@ -58,7 +58,7 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>🔒 Privacy</Text>
               <Text style={styles.description}>
-                MatchMind app is committed to protecting your privacy:
+                MemoryMatch app is committed to protecting your privacy:
               </Text>
 
               <View style={styles.privacyList}>
@@ -73,12 +73,12 @@ const PermissionInfo: React.FC<PermissionInfoProps> = ({ visible, onClose }) => 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>⚙️ Settings</Text>
               <Text style={styles.description}>
-                To manage vibration permission:
+                To manage haptic feedback permission:
               </Text>
 
               <View style={styles.settingsList}>
                 <Text style={styles.settingsItem}>
-                  1. Go to Settings → Apps → MatchMind
+                  1. Go to Settings → Apps → MemoryMatch
                 </Text>
                 <Text style={styles.settingsItem}>
                   2. Select "Permissions"

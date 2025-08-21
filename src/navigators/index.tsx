@@ -22,7 +22,7 @@ export const Navigations: React.FC = () => {
         <Stack.Screen
           name={APP_SCREEN.HOME}
           component={HomeScreen}
-          options={{ title: 'MatchMind' }}
+          options={{ title: 'MemoryMatch' }}
         />
         <Stack.Screen
           name={APP_SCREEN.GAME}

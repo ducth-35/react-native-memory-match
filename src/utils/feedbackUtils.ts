@@ -1,76 +1,87 @@
-import { Vibration, Platform } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 /**
- * Haptic feedback utilities for Android
- * Uses Vibration API with different patterns
+ * Haptic feedback utilities using react-native-haptic-feedback
+ * Provides cross-platform haptic feedback with appropriate feedback types
  */
 export const HapticFeedback = {
   // Light tap feedback
   light: () => {
     try {
-      if (Platform.OS === 'android') {
-        Vibration.vibrate(50); // 50ms light vibration
-      }
+      ReactNativeHapticFeedback.trigger('impactLight', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
     } catch (error) {
-      console.log('Vibration not available:', error);
+      console.log('Haptic feedback not available:', error);
     }
   },
 
   // Medium impact feedback
   medium: () => {
     try {
-      if (Platform.OS === 'android') {
-        Vibration.vibrate(100); // 100ms medium vibration
-      }
+      ReactNativeHapticFeedback.trigger('impactMedium', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
     } catch (error) {
-      console.log('Vibration not available:', error);
+      console.log('Haptic feedback not available:', error);
     }
   },
 
   // Heavy impact feedback
   heavy: () => {
     try {
-      if (Platform.OS === 'android') {
-        Vibration.vibrate(200); // 200ms heavy vibration
-      }
+      ReactNativeHapticFeedback.trigger('impactHeavy', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
     } catch (error) {
-      console.log('Vibration not available:', error);
+      console.log('Haptic feedback not available:', error);
     }
   },
 
   // Success feedback pattern
   success: () => {
     try {
-      if (Platform.OS === 'android') {
-        // Pattern: pause 0ms, vibrate 100ms, pause 50ms, vibrate 100ms
-        Vibration.vibrate([0, 100, 50, 100]);
-      }
+      ReactNativeHapticFeedback.trigger('notificationSuccess', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
     } catch (error) {
-      console.log('Vibration not available:', error);
+      console.log('Haptic feedback not available:', error);
     }
   },
 
   // Error feedback pattern
   error: () => {
     try {
-      if (Platform.OS === 'android') {
-        // Pattern: pause 0ms, vibrate 150ms, pause 100ms, vibrate 150ms, pause 100ms, vibrate 150ms
-        Vibration.vibrate([0, 150, 100, 150, 100, 150]);
-      }
+      ReactNativeHapticFeedback.trigger('notificationError', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
     } catch (error) {
-      console.log('Vibration not available:', error);
+      console.log('Haptic feedback not available:', error);
     }
   },
 
   // Game complete celebration pattern
   celebration: () => {
     try {
-      if (Platform.OS === 'android') {
-        // Complex celebration pattern
-        Vibration.vibrate([0, 200, 100, 200, 100, 200, 100, 400]);
-      }
+      // Use a sequence of haptic feedback for celebration
+      ReactNativeHapticFeedback.trigger('notificationSuccess', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
+      // Add a slight delay and trigger another success feedback
+      setTimeout(() => {
+        ReactNativeHapticFeedback.trigger('impactHeavy', {
+          enableVibrateFallback: true,
+          ignoreAndroidSystemSettings: false,
+        });
+      }, 200);
     } catch (error) {
-      console.log('Vibration not available:', error);
+      console.log('Haptic feedback not available:', error);
     }
   },
 };

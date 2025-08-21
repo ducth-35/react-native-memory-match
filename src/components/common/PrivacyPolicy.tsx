@@ -40,7 +40,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>🔒 Privacy Commitment</Text>
               <Text style={styles.text}>
-                MatchMind - Memory Card Game is committed to protecting user privacy.
+                MemoryMatch - Memory Card Game is committed to protecting user privacy.
                 This policy explains how we handle information when you use the app.
               </Text>
             </View>
@@ -48,7 +48,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>📊 Information Collection</Text>
               <Text style={styles.text}>
-                MatchMind app does NOT collect any personal information, including:
+                MemoryMatch app does NOT collect any personal information, including:
               </Text>
               <View style={styles.list}>
                 <Text style={styles.listItem}>• Name, email, phone number</Text>
@@ -77,7 +77,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>🌐 Network Connection</Text>
               <Text style={styles.text}>
-                MatchMind app works completely OFFLINE:
+                MemoryMatch app works completely OFFLINE:
               </Text>
               <View style={styles.list}>
                 <Text style={styles.listItem}>• No internet connection</Text>
@@ -95,7 +95,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ visible, onClose }) => {
               <View style={styles.permissionBox}>
                 <Text style={styles.permissionTitle}>📳 VIBRATE</Text>
                 <Text style={styles.permissionDesc}>
-                  To create vibration effects when playing the game, making the experience more immersive.
+                  To create enhanced haptic feedback effects when playing the game, making the experience more immersive.
                 </Text>
               </View>
             </View>

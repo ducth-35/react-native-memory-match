@@ -70,7 +70,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <Animated.View style={[styles.content, animatedStyle]}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.gameName}>MatchMind</Text>
+            <Text style={styles.gameName}>MemoryMatch</Text>
             <Text style={styles.gameSubtitle}>Memory Card Mini Game</Text>
           </View>
 

@@ -1,84 +1,29 @@
-# React Native App Template with React Navigation, React Query, and Zustand
+# MemoryMatch - Memory Card Game
 
-## Introduction
+## About
 
-This markdown provides a basic structure for this template.
+MemoryMatch is a classic memory card game designed to help train your memory and concentration skills. Challenge yourself with different difficulty levels and enjoy enhanced haptic feedback for an immersive gaming experience.
 
-### Technologies Used:
+## Features
 
-- React Native
-- React Navigation
-- React Query
-- Zustand
-- Axios
+- 🧠 **Memory Training**: Classic memory card matching gameplay
+- 🎯 **Multiple Difficulty Levels**: Choose from Easy, Medium, and Hard modes
+- 📱 **Cross-Platform**: Available on both iOS and Android
+- 🎮 **Enhanced Haptic Feedback**: Immersive tactile feedback using react-native-haptic-feedback
+- 🔒 **Privacy Focused**: No data collection, works completely offline
+- 🎨 **Beautiful UI**: Clean and intuitive design
 
-## Setup & Run
+## Privacy & Permissions
 
-To set up the project, follow these steps:
+MemoryMatch respects your privacy:
 
-1. **Clone this repo**
-   `https://github.com/ducth-35/react-native-app-template.git`
-2. **Run source**
+- **No Data Collection**: We don't collect any personal information
+- **Offline Gameplay**: Works completely offline
+- **Single Permission**: Only requires VIBRATE permission for haptic feedback
 
-```
-   cd react-native-app-template
+## Support & Contact
 
-   yarn install
+If you encounter any issues, have questions, or need assistance with the app, please don't hesitate to reach out:
 
-   cd ios && pod install
+**Email Support**: ducth.dev2@gmail.com
 
-   cd .. && yarn start
-```
-
-## Structure
-
-```
-react-native-app-template/
-│
-├── src/
-│ ├── apis/
-│ │ └── index.ts (include config instance & endpoints)
-│ │ └── todo.api.ts
-| |
-│ ├── assets/
-│ │ └── fonts
-│ │ └── icons
-│ │ └── images
-│ │
-│ ├── components/
-│ │ └── index.ts
-│ │ └── .... (some component here)
-│ │
-│ ├── configs/
-│ │ └── ... (add configure here)
-│ │
-│ ├── hooks/
-│ │ └── todos
-│ │   └── ....(hooks implement by react-query)
-│ │ └──useCustomHooks.ts (implement custom hooks)
-│ │
-│ ├── navigators/
-│ │ └── index.tsx (root navigators, where u can authorize, custom routes,...)
-│ | └── private.tsx
-│ | └── public.tsx
-│ │
-│ └── screens/
-│ | └── Home/
-│ | └── Profile/
-│ | └── ...etc/
-| |
-│ └── store/
-│ | └── useStore.ts
-│ | └── useAnotherStore.ts
-| |
-│ └── types/
-│ | └── global.ts
-│ | └── ....etc.ts
-│ |
-│ └── utils/
-│ | └── intex.ts
-│ | └── ....etc.ts
-| |
-├── App.js
-└── ...
-```

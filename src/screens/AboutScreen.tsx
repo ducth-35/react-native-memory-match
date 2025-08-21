@@ -43,7 +43,7 @@ const AboutScreen: React.FC<AboutScreenProps> = ({navigation}) => {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* App Info */}
         <View style={styles.section}>
-          <Text style={styles.appTitle}>MatchMind</Text>
+          <Text style={styles.appTitle}>MemoryMatch</Text>
           <Text style={styles.appSubtitle}>Memory Card Game</Text>
           <Text style={styles.version}>Version 1.0.0</Text>
         </View>
@@ -52,7 +52,7 @@ const AboutScreen: React.FC<AboutScreenProps> = ({navigation}) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>📖 Description</Text>
           <Text style={styles.description}>
-            MatchMind is a classic memory game that helps train your memory and
+            MemoryMatch is a classic memory game that helps train your memory and
             concentration skills. The game is completely free, ad-free and works
             offline.
           </Text>
@@ -110,11 +110,11 @@ const AboutScreen: React.FC<AboutScreenProps> = ({navigation}) => {
             onPress={openPrivacyPolicy}>
             <Text style={styles.privacyButtonText}>📄 View Privacy Policy</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={openPermissionInfo}>
+          {/* <TouchableOpacity onPress={openPermissionInfo}>
             <Text style={styles.privacyButtonText}>
               🔐 Permission Information
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Permissions */}
@@ -123,7 +123,7 @@ const AboutScreen: React.FC<AboutScreenProps> = ({navigation}) => {
           <View style={styles.permissionItem}>
             <Text style={styles.permissionName}>📳 VIBRATE</Text>
             <Text style={styles.permissionDescription}>
-              Required to create vibration effects (haptic feedback) when
+              Required to create enhanced haptic feedback effects when
               playing the game, making the gaming experience more immersive.
             </Text>
           </View>
